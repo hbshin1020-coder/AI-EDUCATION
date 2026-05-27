@@ -1,0 +1,4181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Education Hub - Learn AI, Use AI, Master AI</title>
+    <meta name="description" content="Your complete guide to understanding AI and using it for education">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ============================================
+   CSS VARIABLES & RESET
+   ============================================ */
+:root {
+    --primary: #7C3AED;
+    --primary-light: #A78BFA;
+    --primary-dark: #5B21B6;
+    --secondary: #06B6D4;
+    --secondary-light: #67E8F9;
+    --accent: #F59E0B;
+    --accent-light: #FCD34D;
+    --success: #10B981;
+    --error: #EF4444;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --transition: all 0.3s ease;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #334155;
+    --bg-card: #1E293B;
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --text-tertiary: #64748B;
+    --border: #334155;
+    --shadow: rgba(0,0,0,0.3);
+    --glass: rgba(30,41,59,0.8);
+    --glass-border: rgba(51,65,85,0.5);
+    --nav-bg: rgba(15,23,42,0.95);
+}
+
+[data-theme="light"] {
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #F1F5F9;
+    --bg-card: #FFFFFF;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-tertiary: #94A3B8;
+    --border: #E2E8F0;
+    --shadow: rgba(0,0,0,0.1);
+    --glass: rgba(255,255,255,0.8);
+    --glass-border: rgba(255,255,255,0.3);
+    --nav-bg: rgba(248,250,252,0.95);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: var(--transition);
+    overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { cursor: pointer; border: none; outline: none; font-family: var(--font-body); }
+input, textarea { font-family: var(--font-body); outline: none; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 80px 0; }
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(124,58,237,0.3); }
+    50% { box-shadow: 0 0 40px rgba(124,58,237,0.6); }
+}
+@keyframes typingDots {
+    0%, 20% { opacity: 0; }
+    50% { opacity: 1; }
+    80%, 100% { opacity: 0; }
+}
+@keyframes neuralPulse {
+    0% { r: 3; opacity: 0.5; }
+    50% { r: 6; opacity: 1; }
+    100% { r: 3; opacity: 0.5; }
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   BACKGROUND PARTICLES
+   ============================================ */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+    padding: 0;
+}
+.navbar.scrolled {
+    box-shadow: 0 4px 30px var(--shadow);
+}
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.nav-logo i {
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.nav-logo span {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.nav-links a {
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    position: relative;
+}
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+    background: rgba(124,58,237,0.1);
+}
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+}
+.theme-toggle:hover {
+    background: var(--primary);
+    color: white;
+    transform: rotate(180deg);
+}
+.btn-primary {
+    padding: 10px 24px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124,58,237,0.4);
+}
+.btn-secondary {
+    padding: 10px 24px;
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+.btn-accent {
+    padding: 10px 24px;
+    background: linear-gradient(135deg, var(--accent), #F97316);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(245,158,11,0.4);
+}
+
+/* Mobile Menu */
+.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    padding: 5px;
+}
+.mobile-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+.mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 70px;
+}
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.hero-gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+}
+.hero-gradient-orb.orb1 {
+    width: 500px;
+    height: 500px;
+    background: var(--primary);
+    top: -100px;
+    right: -100px;
+    animation: float 8s ease-in-out infinite;
+}
+.hero-gradient-orb.orb2 {
+    width: 400px;
+    height: 400px;
+    background: var(--secondary);
+    bottom: -100px;
+    left: -100px;
+    animation: float 10s ease-in-out infinite reverse;
+}
+.hero-gradient-orb.orb3 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent);
+    top: 50%;
+    left: 50%;
+    animation: float 12s ease-in-out infinite;
+}
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+.hero-text {
+    animation: slideInLeft 0.8s ease;
+}
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(124,58,237,0.1);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: var(--primary-light);
+    margin-bottom: 1.5rem;
+    animation: bounceIn 0.6s ease 0.3s both;
+}
+.hero-badge i {
+    animation: pulse 2s ease-in-out infinite;
+}
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+.hero-title .highlight {
+    position: relative;
+    display: inline-block;
+}
+.hero-title .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.3));
+    border-radius: 4px;
+    z-index: -1;
+}
+.hero-description {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+.hero-stats {
+    display: flex;
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+.hero-stat {
+    text-align: center;
+}
+.hero-stat .number {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero-stat .label {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
+/* Hero Visual - Neural Network Animation */
+.hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slideInRight 0.8s ease;
+}
+.neural-network-container {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+    position: relative;
+}
+.neural-network-svg {
+    width: 100%;
+    height: 100%;
+}
+.neural-line {
+    stroke: var(--primary);
+    stroke-width: 1;
+    opacity: 0.3;
+}
+.neural-node {
+    fill: var(--primary);
+    animation: neuralPulse 3s ease-in-out infinite;
+}
+.neural-node:nth-child(odd) { animation-delay: 0.5s; }
+.neural-node:nth-child(even) { animation-delay: 1s; }
+.hero-floating-card {
+    position: absolute;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    animation: float 4s ease-in-out infinite;
+    box-shadow: 0 8px 30px var(--shadow);
+}
+.hero-floating-card.card1 {
+    top: 10%;
+    right: -10px;
+    animation-delay: 0s;
+}
+.hero-floating-card.card2 {
+    bottom: 20%;
+    left: -10px;
+    animation-delay: 1s;
+}
+.hero-floating-card.card3 {
+    bottom: 5%;
+    right: 10%;
+    animation-delay: 2s;
+}
+.hero-floating-card i {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+.hero-floating-card .card-success { color: var(--success); }
+.hero-floating-card .card-accent { color: var(--accent); }
+
+/* ============================================
+   QUICK QUIZ SECTION
+   ============================================ */
+.quiz-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+.quiz-container {
+    text-align: center;
+}
+.quiz-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+.quiz-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+.quiz-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+.quiz-option {
+    padding: 16px 28px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.quiz-option:hover {
+    border-color: var(--primary);
+    background: rgba(124,58,237,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(124,58,237,0.2);
+}
+.quiz-option i {
+    font-size: 1.3rem;
+}
+.quiz-result {
+    margin-top: 2rem;
+    padding: 20px;
+    background: rgba(124,58,237,0.1);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: var(--radius-md);
+    display: none;
+}
+.quiz-result.active {
+    display: block;
+    animation: fadeInUp 0.5s ease;
+}
+
+/* ============================================
+   HOW AI WORKS SECTION (PREVIEW)
+   ============================================ */
+.how-ai-section {
+    position: relative;
+}
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.module-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+.module-card:hover::before {
+    transform: scaleX(1);
+}
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px var(--shadow);
+    border-color: var(--primary);
+}
+.module-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+.module-icon.purple { background: linear-gradient(135deg, #7C3AED, #A78BFA); }
+.module-icon.cyan { background: linear-gradient(135deg, #06B6D4, #67E8F9); }
+.module-icon.amber { background: linear-gradient(135deg, #F59E0B, #FCD34D); }
+.module-icon.green { background: linear-gradient(135deg, #10B981, #6EE7B7); }
+.module-icon.pink { background: linear-gradient(135deg, #EC4899, #F9A8D4); }
+.module-icon.blue { background: linear-gradient(135deg, #3B82F6, #93C5FD); }
+.module-icon.red { background: linear-gradient(135deg, #EF4444, #FCA5A5); }
+.module-icon.indigo { background: linear-gradient(135deg, #6366F1, #A5B4FC); }
+
+.module-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.module-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.module-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+.module-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.module-difficulty {
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.difficulty-beginner { background: rgba(16,185,129,0.1); color: var(--success); }
+.difficulty-intermediate { background: rgba(245,158,11,0.1); color: var(--accent); }
+.difficulty-advanced { background: rgba(239,68,68,0.1); color: var(--error); }
+
+/* ============================================
+   HOW AI WORKS - FULL PAGE
+   ============================================ */
+.how-ai-page {
+    padding-top: 90px;
+}
+.module-detail {
+    display: none;
+}
+.module-detail.active {
+    display: block;
+    animation: fadeInUp 0.5s ease;
+}
+.module-header {
+    text-align: center;
+    padding: 40px 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+}
+.module-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.module-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.lesson-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+.lesson-block h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.lesson-block h2 i {
+    color: var(--primary);
+}
+.lesson-block p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+.lesson-block ul {
+    margin-left: 20px;
+    margin-bottom: 1rem;
+}
+.lesson-block ul li {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    list-style: disc;
+    line-height: 1.6;
+}
+.highlight-box {
+    background: rgba(124,58,237,0.1);
+    border-left: 4px solid var(--primary);
+    padding: 1rem 1.5rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 1rem 0;
+}
+.highlight-box p {
+    color: var(--text-primary) !important;
+    font-weight: 500;
+}
+
+/* Interactive Demo Boxes */
+.interactive-demo {
+    background: var(--bg-tertiary);
+    border: 2px dashed var(--primary);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+.interactive-demo h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+.interactive-demo .demo-area {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Neural Network Interactive */
+.nn-builder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+.nn-layer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.nn-layer-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+}
+.nn-neuron {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+.nn-neuron:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(124,58,237,0.5);
+}
+.nn-neuron.input { background: linear-gradient(135deg, #3B82F6, #93C5FD); }
+.nn-neuron.hidden { background: linear-gradient(135deg, #7C3AED, #A78BFA); }
+.nn-neuron.output { background: linear-gradient(135deg, #10B981, #6EE7B7); }
+.nn-neuron.active {
+    animation: glow 1s ease-in-out infinite;
+    transform: scale(1.2);
+}
+
+/* Quiz Component */
+.lesson-quiz {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+.lesson-quiz h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.lesson-quiz h3 i {
+    color: var(--accent);
+}
+.quiz-question {
+    margin-bottom: 2rem;
+}
+.quiz-question p {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+.quiz-answers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.quiz-answer {
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    text-align: left;
+}
+.quiz-answer:hover {
+    border-color: var(--primary);
+    background: rgba(124,58,237,0.05);
+}
+.quiz-answer.correct {
+    border-color: var(--success);
+    background: rgba(16,185,129,0.1);
+    color: var(--success);
+}
+.quiz-answer.wrong {
+    border-color: var(--error);
+    background: rgba(239,68,68,0.1);
+    color: var(--error);
+}
+.quiz-feedback {
+    margin-top: 1rem;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    display: none;
+}
+.quiz-feedback.show { display: block; animation: fadeInUp 0.3s ease; }
+.quiz-feedback.correct { background: rgba(16,185,129,0.1); color: var(--success); }
+.quiz-feedback.wrong { background: rgba(239,68,68,0.1); color: var(--error); }
+
+/* Progress Bar */
+.progress-container {
+    background: var(--bg-tertiary);
+    border-radius: 50px;
+    height: 8px;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 50px;
+    transition: width 0.5s ease;
+}
+
+/* ============================================
+   AI TOOLS DIRECTORY
+   ============================================ */
+.tools-page {
+    padding-top: 90px;
+}
+.tools-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+.filter-btn {
+    padding: 10px 20px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    cursor: pointer;
+}
+.filter-btn:hover, .filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+.tool-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px var(--shadow);
+    border-color: var(--primary);
+}
+.tool-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+.tool-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: white;
+}
+.tool-card-header h3 {
+    font-size: 1.1rem;
+}
+.tool-card-header .tool-category {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+.tool-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+.tool-best-for {
+    font-size: 0.85rem;
+    color: var(--primary-light);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+.tool-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+}
+.tool-tag {
+    padding: 4px 10px;
+    background: var(--bg-tertiary);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+.tool-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+.tool-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent);
+    font-size: 0.85rem;
+}
+.tool-pricing {
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.tool-pricing.free { background: rgba(16,185,129,0.1); color: var(--success); }
+.tool-pricing.freemium { background: rgba(245,158,11,0.1); color: var(--accent); }
+.tool-pricing.paid { background: rgba(239,68,68,0.1); color: var(--error); }
+
+/* Tool Detail Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+.modal-content {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    max-width: 700px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2.5rem;
+    position: relative;
+    animation: fadeInUp 0.4s ease;
+}
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+.modal-close:hover {
+    background: var(--error);
+    color: white;
+}
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+.modal-content .modal-category {
+    color: var(--text-tertiary);
+    margin-bottom: 1.5rem;
+}
+.modal-section {
+    margin-bottom: 1.5rem;
+}
+.modal-section h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-light);
+}
+.modal-section p, .modal-section li {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+.pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.pros li::before { content: '✅ '; }
+.cons li::before { content: '❌ '; }
+.pros li, .cons li {
+    list-style: none;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   AI IN EDUCATION
+   ============================================ */
+.education-page {
+    padding-top: 90px;
+}
+.education-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+.edu-tab {
+    padding: 10px 20px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+.edu-tab:hover, .edu-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+.edu-content {
+    display: none;
+}
+.edu-content.active {
+    display: block;
+    animation: fadeInUp 0.5s ease;
+}
+.edu-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+.edu-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 8px 30px var(--shadow);
+}
+.edu-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.edu-card h3 i { color: var(--primary); }
+.edu-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+.edu-card ul {
+    margin-left: 20px;
+}
+.edu-card ul li {
+    color: var(--text-secondary);
+    list-style: disc;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Prompt Library */
+.prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+.prompt-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+}
+.prompt-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+.prompt-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+.prompt-card .prompt-text {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--primary-light);
+    background: var(--bg-tertiary);
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+}
+.prompt-card .prompt-use {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    background: var(--primary);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: var(--transition);
+}
+.prompt-card:hover .copy-btn { opacity: 1; }
+.copy-btn.copied { background: var(--success); }
+
+/* ============================================
+   BLOG
+   ============================================ */
+.blog-page {
+    padding-top: 90px;
+}
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+.blog-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px var(--shadow);
+}
+.blog-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    position: relative;
+}
+.blog-image .blog-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 12px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    backdrop-filter: blur(10px);
+}
+.blog-body {
+    padding: 1.5rem;
+}
+.blog-body h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.blog-body p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+.blog-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+.blog-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ============================================
+   DASHBOARD
+   ============================================ */
+.dashboard-page {
+    padding-top: 90px;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+}
+.dashboard-sidebar {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+}
+.user-profile {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    margin: 0 auto 1rem;
+}
+.user-profile h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+.user-profile p {
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+}
+.user-level {
+    margin-top: 1rem;
+    padding: 8px 16px;
+    background: rgba(124,58,237,0.1);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 600;
+    display: inline-block;
+}
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.sidebar-menu a {
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+.sidebar-menu a:hover, .sidebar-menu a.active {
+    background: rgba(124,58,237,0.1);
+    color: var(--primary);
+}
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.dash-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+.dash-stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+}
+.dash-stat-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+.dash-stat-card i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+.dash-stat-card .stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+}
+.dash-stat-card .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+.dash-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+.dash-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dash-section h3 i { color: var(--primary); }
+.course-progress-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.8rem;
+}
+.course-progress-item .course-info { flex: 1; }
+.course-progress-item h4 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+.course-progress-item p { font-size: 0.8rem; color: var(--text-tertiary); }
+.course-progress-item .progress-percent {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+.badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+}
+.badge-item {
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+.badge-item:hover { transform: scale(1.05); }
+.badge-item .badge-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.badge-item .badge-name {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+.badge-item.locked { opacity: 0.4; }
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact-page {
+    padding-top: 90px;
+}
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+.contact-info h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.contact-info > p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1.5rem;
+}
+.contact-item-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    background: rgba(124,58,237,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+.contact-item h4 { font-size: 1rem; margin-bottom: 2px; }
+.contact-item p { color: var(--text-secondary); font-size: 0.9rem; }
+.contact-form {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+}
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+.form-group input:focus, .form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+}
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+.form-success {
+    padding: 12px;
+    background: rgba(16,185,129,0.1);
+    color: var(--success);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-weight: 500;
+    display: none;
+    margin-top: 1rem;
+}
+.form-success.show {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+/* ============================================
+   LOGIN / REGISTER
+   ============================================ */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.auth-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+}
+.auth-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+.auth-card .auth-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+.auth-card .form-group { text-align: left; }
+.auth-toggle {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+.auth-toggle a {
+    color: var(--primary);
+    font-weight: 600;
+}
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+}
+.auth-divider::before, .auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+.social-login {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+.social-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+.social-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   CHATBOT WIDGET
+   ============================================ */
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1500;
+}
+.chat-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 30px rgba(124,58,237,0.4);
+    transition: var(--transition);
+    position: relative;
+}
+.chat-toggle:hover {
+    transform: scale(1.1);
+}
+.chat-toggle .chat-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 18px;
+    height: 18px;
+    background: var(--error);
+    border-radius: 50%;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chat-window {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 380px;
+    height: 500px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px var(--shadow);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+.chat-window.active {
+    display: flex;
+    animation: fadeInUp 0.3s ease;
+}
+.chat-header {
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.chat-header-avatar {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chat-header-info h4 { font-size: 0.95rem; }
+.chat-header-info p { font-size: 0.75rem; opacity: 0.8; }
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.chat-message {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.chat-message.bot {
+    background: var(--bg-tertiary);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+.chat-message.user {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+.chat-message.typing .typing-indicator {
+    display: flex;
+    gap: 4px;
+}
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: var(--text-tertiary);
+    border-radius: 50%;
+    animation: typingDots 1.4s ease-in-out infinite;
+}
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+.chat-input-container {
+    padding: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+}
+.chat-input-container input {
+    flex: 1;
+    padding: 10px 14px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+.chat-input-container input:focus {
+    border-color: var(--primary);
+}
+.chat-send {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chat-send:hover { transform: scale(1.1); }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    padding: 60px 0 20px;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+.footer-brand h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.footer-brand p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+.footer-social {
+    display: flex;
+    gap: 10px;
+}
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+.footer-social a:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+}
+.footer-column h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+.footer-column a {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: 4px 0;
+    transition: var(--transition);
+}
+.footer-column a:hover {
+    color: var(--primary);
+    transform: translateX(5px);
+}
+.footer-bottom {
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+.newsletter-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 1rem;
+}
+.newsletter-form input {
+    flex: 1;
+    padding: 10px 14px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+.newsletter-form button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Scroll to top */
+.scroll-top {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    z-index: 1400;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(124,58,237,0.3);
+}
+.scroll-top.visible {
+    display: flex;
+}
+.scroll-top:hover {
+    transform: translateY(-3px);
+    background: var(--primary-dark);
+}
+
+/* ============================================
+   PAGE TRANSITIONS
+   ============================================ */
+.page {
+    display: none;
+    animation: fadeIn 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+.page.active {
+    display: block;
+}
+
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transition: opacity 0.5s ease;
+}
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: rotate 1s linear infinite;
+}
+.loading-text {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Featured Tools on Home */
+.featured-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+.featured-tool-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.featured-tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px var(--shadow);
+    border-color: var(--primary);
+}
+.featured-tool-card i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+.featured-tool-card h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+.featured-tool-card p { color: var(--text-tertiary); font-size: 0.85rem; }
+
+/* Stats Counter */
+.stats-section {
+    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark, #0891B2));
+    padding: 60px 0;
+    color: white;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+.stat-item .stat-number {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+.stat-item .stat-label {
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+    .hero-content { grid-template-columns: 1fr; text-align: center; }
+    .hero-visual { display: none; }
+    .hero-buttons { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .dashboard-sidebar { position: static; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .dash-stats { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; }
+    .pros-cons { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: flex; }
+    .nav-links.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(20px);
+        padding: 20px;
+        border-bottom: 1px solid var(--border);
+    }
+    .hero-title { font-size: 2.2rem; }
+    .hero-description { font-size: 1rem; }
+    .section-title { font-size: 1.8rem; }
+    .chat-window { width: 320px; right: -10px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .stat-item .stat-number { font-size: 2rem; }
+    .dash-stats { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+    .hero-title { font-size: 1.8rem; }
+    .hero-stats { flex-direction: column; gap: 1rem; }
+    .quiz-options { flex-direction: column; }
+    .quiz-option { width: 100%; justify-content: center; }
+    .hero-buttons { flex-direction: column; }
+    .hero-buttons .btn-primary, .hero-buttons .btn-secondary { width: 100%; text-align: center; }
+    .stats-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading AI Education Hub...</div>
+    </div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" onclick="navigateTo('home')">
+                <i class="fas fa-brain"></i>
+                <span>AI EduHub</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#" class="active" data-page="home" onclick="navigateTo('home')">Home</a>
+                <a href="#" data-page="how-ai-works" onclick="navigateTo('how-ai-works')">How AI Works</a>
+                <a href="#" data-page="tools" onclick="navigateTo('tools')">AI Tools</a>
+                <a href="#" data-page="education" onclick="navigateTo('education')">Education</a>
+                <a href="#" data-page="blog" onclick="navigateTo('blog')">Blog</a>
+                <a href="#" data-page="dashboard" onclick="navigateTo('dashboard')">Dashboard</a>
+                <a href="#" data-page="contact" onclick="navigateTo('contact')">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn-primary" onclick="navigateTo('login')">
+                    <i class="fas fa-user"></i> Sign In
+                </button>
+                <button class="mobile-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HOME PAGE
+         ============================================ -->
+    <div class="page active" id="page-home">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-gradient-orb orb1"></div>
+                <div class="hero-gradient-orb orb2"></div>
+                <div class="hero-gradient-orb orb3"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-badge">
+                            <i class="fas fa-sparkles"></i>
+                            #1 AI Learning Platform
+                        </div>
+                        <h1 class="hero-title">
+                            Understand AI.<br>
+                            <span class="gradient-text highlight">Use AI.</span><br>
+                            Learn with AI.
+                        </h1>
+                        <p class="hero-description">
+                            Your complete interactive guide to understanding how Artificial Intelligence is built, how it works, and how to use the best AI tools for education and learning.
+                        </p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary" onclick="navigateTo('how-ai-works')">
+                                <i class="fas fa-play"></i> Start Learning
+                            </button>
+                            <button class="btn-secondary" onclick="navigateTo('tools')">
+                                <i class="fas fa-tools"></i> Explore AI Tools
+                            </button>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="number" data-target="50">0</div>
+                                <div class="label">Interactive Lessons</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="number" data-target="200">0</div>
+                                <div class="label">AI Tools Reviewed</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="number" data-target="10000">0</div>
+                                <div class="label">Students Learning</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="neural-network-container">
+                            <svg class="neural-network-svg" viewBox="0 0 400 400" id="neuralNetSvg">
+                            </svg>
+                            <div class="hero-floating-card card1">
+                                <i class="fas fa-robot"></i>
+                                <span>AI is learning...</span>
+                            </div>
+                            <div class="hero-floating-card card2">
+                                <i class="fas fa-check-circle card-success"></i>
+                                <span>Model trained!</span>
+                            </div>
+                            <div class="hero-floating-card card3">
+                                <i class="fas fa-fire card-accent"></i>
+                                <span>98.5% Accuracy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Quiz Section -->
+        <section class="quiz-section section">
+            <div class="container quiz-container">
+                <h2 class="quiz-title">🎯 What do you want to learn about AI?</h2>
+                <p class="quiz-subtitle">Choose a topic and we'll guide you to the right place</p>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="handleQuiz('how-ai-works')">
+                        <i class="fas fa-cogs" style="color:var(--primary)"></i> How AI is Made
+                    </button>
+                    <button class="quiz-option" onclick="handleQuiz('tools')">
+                        <i class="fas fa-tools" style="color:var(--secondary)"></i> AI Tools for Study
+                    </button>
+                    <button class="quiz-option" onclick="handleQuiz('education')">
+                        <i class="fas fa-graduation-cap" style="color:var(--accent)"></i> AI in Education
+                    </button>
+                    <button class="quiz-option" onclick="handleQuiz('how-ai-works')">
+                        <i class="fas fa-brain" style="color:var(--success)"></i> Neural Networks
+                    </button>
+                    <button class="quiz-option" onclick="handleQuiz('tools')">
+                        <i class="fas fa-pen" style="color:var(--error)"></i> AI for Writing
+                    </button>
+                    <button class="quiz-option" onclick="handleQuiz('education')">
+                        <i class="fas fa-code" style="color:#6366F1"></i> AI for Coding
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- How AI Works Preview -->
+        <section class="how-ai-section section">
+            <div class="container">
+                <h2 class="section-title"><span class="gradient-text">How AI Works</span></h2>
+                <p class="section-subtitle">Interactive modules that take you from zero to AI expert</p>
+                <div class="modules-grid">
+                    <div class="module-card animate-on-scroll" onclick="navigateTo('how-ai-works')">
+                        <div class="module-icon purple"><i class="fas fa-question-circle"></i></div>
+                        <h3>What is AI?</h3>
+                        <p>Understand the basics of Artificial Intelligence and how it differs from human intelligence</p>
+                        <div class="module-meta">
+                            <span class="module-difficulty difficulty-beginner">Beginner</span>
+                            <span><i class="fas fa-clock"></i> 15 min</span>
+                            <span><i class="fas fa-gamepad"></i> 3 activities</span>
+                        </div>
+                    </div>
+                    <div class="module-card animate-on-scroll" onclick="navigateTo('how-ai-works')">
+                        <div class="module-icon cyan"><i class="fas fa-hammer"></i></div>
+                        <h3>How AI is Built</h3>
+                        <p>Step-by-step walkthrough of building an AI system from data collection to deployment</p>
+                        <div class="module-meta">
+                            <span class="module-difficulty difficulty-beginner">Beginner</span>
+                            <span><i class="fas fa-clock"></i> 25 min</span>
+                            <span><i class="fas fa-gamepad"></i> 5 activities</span>
+                        </div>
+                    </div>
+                    <div class="module-card animate-on-scroll" onclick="navigateTo('how-ai-works')">
+                        <div class="module-icon amber"><i class="fas fa-project-diagram"></i></div>
+                        <h3>Neural Networks</h3>
+                        <p>Build and visualize neural networks interactively to understand how AI thinks</p>
+                        <div class="module-meta">
+                            <span class="module-difficulty difficulty-intermediate">Intermediate</span>
+                            <span><i class="fas fa-clock"></i> 30 min</span>
+                            <span><i class="fas fa-gamepad"></i> 4 activities</span>
+                        </div>
+                    </div>
+                    <div class="module-card animate-on-scroll" onclick="navigateTo('how-ai-works')">
+                        <div class="module-icon green"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>How AI Learns</h3>
+                        <p>Discover supervised, unsupervised, and reinforcement learning with live demos</p>
+                        <div class="module-meta">
+                            <span class="module-difficulty difficulty-intermediate">Intermediate</span>
+                            <span><i class="fas fa-clock"></i> 25 min</span>
+                            <span><i class="fas fa-gamepad"></i> 3 activities</span>
+                        </div>
+                    </div>
+                    <div class="module-card animate-on-scroll" onclick="navigateTo('how-ai-works')">
+                        <div class="module-icon pink"><i class="fas fa-language"></i></div>
+                        <h3>AI Technologies</h3>
+                        <p>NLP, Computer Vision, Speech Recognition - how ChatGPT and Siri actually work</p>
+                        <div class="module-meta">
+                            <span class="module-difficulty difficulty-intermediate">Intermediate</span>
+                            <span><i class="fas fa-clock"></i> 35 min</span>
+                            <span><i class="fas fa-gamepad"></i> 6 activities</span>
+                        </div>
+                    </div>
+                    <div class="module-card animate-on-scroll" onclick="navigateTo('how-ai-works')">
+                        <div class="module-icon blue"><i class="fas fa-globe"></i></div>
+                        <h3>AI in Real Life</h3>
+                        <p>Explore how AI powers your phone, social media, healthcare, education and more</p>
+                        <div class="module-meta">
+                            <span class="module-difficulty difficulty-beginner">Beginner</span>
+                            <span><i class="fas fa-clock"></i> 20 min</span>
+                            <span><i class="fas fa-gamepad"></i> 2 activities</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0+</div>
+                        <div class="stat-label">Interactive Lessons</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="200">0+</div>
+                        <div class="stat-label">AI Tools Reviewed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="10000">0+</div>
+                        <div class="stat-label">Active Learners</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="100">0%</div>
+                        <div class="stat-label">Free to Access</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured AI Tools -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title"><span class="gradient-text">Top AI Tools for Learning</span></h2>
+                <p class="section-subtitle">Handpicked AI tools that every student should know about</p>
+                <div class="featured-tools-grid">
+                    <div class="featured-tool-card animate-on-scroll" onclick="navigateTo('tools')">
+                        <i class="fas fa-comment-dots" style="color:#10A37F"></i>
+                        <h4>ChatGPT</h4>
+                        <p>Q&A, Essays, Research</p>
+                    </div>
+                    <div class="featured-tool-card animate-on-scroll" onclick="navigateTo('tools')">
+                        <i class="fas fa-search" style="color:#22D3EE"></i>
+                        <h4>Perplexity AI</h4>
+                        <p>Research with Sources</p>
+                    </div>
+                    <div class="featured-tool-card animate-on-scroll" onclick="navigateTo('tools')">
+                        <i class="fas fa-calculator" style="color:#F97316"></i>
+                        <h4>Wolfram Alpha</h4>
+                        <p>Math & Science</p>
+                    </div>
+                    <div class="featured-tool-card animate-on-scroll" onclick="navigateTo('tools')">
+                        <i class="fas fa-code" style="color:#7C3AED"></i>
+                        <h4>GitHub Copilot</h4>
+                        <p>Coding Assistant</p>
+                    </div>
+                    <div class="featured-tool-card animate-on-scroll" onclick="navigateTo('tools')">
+                        <i class="fas fa-palette" style="color:#EC4899"></i>
+                        <h4>Canva AI</h4>
+                        <p>Design & Presentations</p>
+                    </div>
+                    <div class="featured-tool-card animate-on-scroll" onclick="navigateTo('tools')">
+                        <i class="fas fa-book-reader" style="color:#3B82F6"></i>
+                        <h4>Khanmigo</h4>
+                        <p>AI Tutor by Khan Academy</p>
+                    </div>
+                </div>
+                <div style="text-align:center;margin-top:2rem;">
+                    <button class="btn-primary" onclick="navigateTo('tools')">View All AI Tools <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Blog Posts Preview -->
+        <section class="section" style="background:var(--bg-secondary)">
+            <div class="container">
+                <h2 class="section-title"><span class="gradient-text">Latest AI Insights</span></h2>
+                <p class="section-subtitle">Stay updated with the latest AI trends in education</p>
+                <div class="blog-grid" style="max-width:1000px;margin:0 auto;">
+                    <div class="blog-card animate-on-scroll" onclick="navigateTo('blog')">
+                        <div class="blog-image" style="background:linear-gradient(135deg,#7C3AED,#06B6D4)">
+                            <i class="fas fa-robot"></i>
+                            <span class="blog-tag">AI Basics</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>How ChatGPT Actually Works - A Simple Explanation</h3>
+                            <p>Ever wondered how ChatGPT understands and generates text? We break it down in simple terms...</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-clock"></i> 8 min read</span>
+                                <span><i class="fas fa-calendar"></i> Dec 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-card animate-on-scroll" onclick="navigateTo('blog')">
+                        <div class="blog-image" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="blog-tag">Education</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>10 Ways Students Can Use AI Ethically in 2025</h3>
+                            <p>AI can supercharge your learning without crossing ethical lines. Here's how to do it right...</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-clock"></i> 6 min read</span>
+                                <span><i class="fas fa-calendar"></i> Dec 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="section">
+            <div class="container" style="max-width:600px;text-align:center;">
+                <h2 class="section-title"><span class="gradient-text">Stay Updated</span></h2>
+                <p class="section-subtitle">Get weekly AI learning tips, tool reviews, and education insights</p>
+                <div class="newsletter-form" style="max-width:450px;margin:0 auto;">
+                    <input type="email" placeholder="Enter your email" id="newsletterEmail">
+                    <button class="btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
+                </div>
+                <div id="newsletterSuccess" class="form-success" style="margin-top:1rem;">
+                    🎉 Welcome aboard! Check your inbox for a confirmation.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         HOW AI WORKS PAGE
+         ============================================ -->
+    <div class="page" id="page-how-ai-works">
+        <div class="how-ai-page">
+            <div class="module-header">
+                <div class="container">
+                    <h1><span class="gradient-text">How AI Works</span></h1>
+                    <p style="color:var(--text-secondary);max-width:600px;margin:0 auto;">Interactive lessons that teach you everything about Artificial Intelligence - from the basics to advanced concepts</p>
+                    <div class="progress-container" style="max-width:400px;margin:1.5rem auto 0;">
+                        <div class="progress-bar" id="overallProgress" style="width:0%"></div>
+                    </div>
+                    <p style="font-size:0.85rem;color:var(--text-tertiary);margin-top:0.5rem;">Overall Progress: <span id="progressPercent">0</span>%</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Module 1: What is AI -->
+                <div class="lesson-block animate-on-scroll">
+                    <h2><i class="fas fa-question-circle"></i> Module 1: What is Artificial Intelligence?</h2>
+                    <p>Artificial Intelligence (AI) is the simulation of human intelligence by computer systems. It's the science of making machines that can think, learn, and make decisions — similar to how humans do, but using data and algorithms instead of a biological brain.</p>
+
+                    <div class="highlight-box">
+                        <p>🧠 Think of AI as teaching a computer to do things that normally require human intelligence — like understanding language, recognizing faces, playing games, or driving a car.</p>
+                    </div>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">AI vs Human Intelligence</h3>
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%;border-collapse:collapse;margin-bottom:1rem;">
+                            <thead>
+                                <tr style="background:var(--bg-tertiary);">
+                                    <th style="padding:12px;text-align:left;border:1px solid var(--border);">Feature</th>
+                                    <th style="padding:12px;text-align:left;border:1px solid var(--border);">Human Intelligence</th>
+                                    <th style="padding:12px;text-align:left;border:1px solid var(--border);">Artificial Intelligence</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding:10px;border:1px solid var(--border);">Learning</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">From experience & senses</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">From data & algorithms</td></tr>
+                                <tr><td style="padding:10px;border:1px solid var(--border);">Speed</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">Limited processing</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">Millions of calculations/sec</td></tr>
+                                <tr><td style="padding:10px;border:1px solid var(--border);">Creativity</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">Truly creative</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">Pattern-based generation</td></tr>
+                                <tr><td style="padding:10px;border:1px solid var(--border);">Emotions</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">Has emotions</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">Simulates emotions</td></tr>
+                                <tr><td style="padding:10px;border:1px solid var(--border);">Errors</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">Can get tired/biased</td><td style="padding:10px;border:1px solid var(--border);color:var(--text-secondary)">Consistent but can have data bias</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Interactive: Is This AI? -->
+                    <div class="interactive-demo">
+                        <h3>🎮 Interactive: Is This AI or Not?</h3>
+                        <div class="demo-area">
+                            <p style="font-size:1.1rem;font-weight:600;" id="aiQuizQuestion">Is a calculator an example of AI?</p>
+                            <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+                                <button class="btn-primary" onclick="checkAIQuiz(true)">Yes, it's AI</button>
+                                <button class="btn-secondary" onclick="checkAIQuiz(false)">No, it's not AI</button>
+                            </div>
+                            <p id="aiQuizFeedback" style="margin-top:1rem;font-weight:600;display:none;"></p>
+                        </div>
+                    </div>
+
+                    <!-- Quiz -->
+                    <div class="lesson-quiz">
+                        <h3><i class="fas fa-trophy"></i> Quick Quiz: What is AI?</h3>
+                        <div class="quiz-question">
+                            <p>1. What does AI stand for?</p>
+                            <div class="quiz-answers">
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">Automated Internet</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, true)">Artificial Intelligence</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">Advanced Integration</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">Automatic Information</button>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p>2. Which of these is an example of AI?</p>
+                            <div class="quiz-answers">
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">A simple calculator</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">An electric fan</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, true)">ChatGPT answering questions</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">A light switch</button>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p>3. How does AI learn?</p>
+                            <div class="quiz-answers">
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">By reading books like humans</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, true)">From data and algorithms</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">By watching YouTube videos</button>
+                                <button class="quiz-answer" onclick="checkAnswer(this, false)">It doesn't learn, it's pre-programmed</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2: How AI is Built -->
+                <div class="lesson-block animate-on-scroll">
+                    <h2><i class="fas fa-hammer"></i> Module 2: How AI is Built (Step by Step)</h2>
+                    <p>Building an AI system is like teaching a child — you need data (examples), a method of teaching (algorithm), practice (training), and testing. Here's how it works:</p>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Step 1: Collecting Data 📊</h3>
+                    <p>AI needs data to learn. The more quality data, the smarter the AI becomes. Data can be text, images, audio, numbers — anything!</p>
+                    <div class="highlight-box">
+                        <p>📌 Example: To build an AI that recognizes cats, you'd need thousands of cat photos (and non-cat photos) for the AI to learn from.</p>
+                    </div>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Step 2: Cleaning the Data 🧹</h3>
+                    <p>Raw data is messy. It might have errors, duplicates, or missing values. Cleaning means fixing these issues so the AI doesn't learn wrong patterns.</p>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Step 3: Choosing a Model 🏗️</h3>
+                    <p>A model is the "brain structure" of the AI. Different problems need different models:</p>
+                    <ul>
+                        <li><strong>Decision Trees</strong> — Simple yes/no decisions</li>
+                        <li><strong>Neural Networks</strong> — Complex pattern recognition</li>
+                        <li><strong>Transformers</strong> — Language understanding (used in ChatGPT)</li>
+                    </ul>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Step 4: Training the Model 🎓</h3>
+                    <p>Training means feeding data to the model and letting it find patterns. The model makes predictions, checks if they're right, and adjusts itself. This happens millions of times!</p>
+
+                    <!-- Interactive: Training Visualization -->
+                    <div class="interactive-demo">
+                        <h3>🎮 Interactive: Watch AI Train!</h3>
+                        <div class="demo-area">
+                            <p>Click "Train" to watch the AI improve its accuracy</p>
+                            <div style="width:100%;max-width:400px;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+                                    <span style="font-size:0.9rem;">Accuracy:</span>
+                                    <span id="trainAccuracy" style="font-weight:700;color:var(--primary);">0%</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-bar" id="trainProgressBar" style="width:0%"></div>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;margin-top:0.5rem;">
+                                    <span style="font-size:0.85rem;color:var(--text-tertiary);">Epoch: <span id="trainEpoch">0</span>/10</span>
+                                    <span style="font-size:0.85rem;color:var(--text-tertiary);">Loss: <span id="trainLoss">1.000</span></span>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="simulateTraining()" id="trainBtn">
+                                <i class="fas fa-play"></i> Start Training
+                            </button>
+                        </div>
+                    </div>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Step 5: Testing & Evaluation ✅</h3>
+                    <p>After training, the AI is tested with new data it has never seen before. If it performs well, it's ready! If not, we go back and improve.</p>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Step 6: Deployment 🚀</h3>
+                    <p>The trained model is deployed to a server or app where real users can interact with it — like when you use ChatGPT or ask Siri a question.</p>
+                </div>
+
+                <!-- Module 3: Neural Networks -->
+                <div class="lesson-block animate-on-scroll">
+                    <h2><i class="fas fa-project-diagram"></i> Module 3: Neural Networks - How AI Thinks</h2>
+                    <p>Neural Networks are inspired by the human brain. They consist of layers of "neurons" that process information and learn patterns.</p>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Structure of a Neural Network</h3>
+                    <ul>
+                        <li><strong>Input Layer</strong> — Receives the data (like pixels of an image)</li>
+                        <li><strong>Hidden Layers</strong> — Process and find patterns in the data</li>
+                        <li><strong>Output Layer</strong> — Gives the final answer (like "this is a cat")</li>
+                    </ul>
+
+                    <!-- Interactive Neural Network -->
+                    <div class="interactive-demo">
+                        <h3>🎮 Interactive: Click Neurons to Activate!</h3>
+                        <div class="demo-area">
+                            <div class="nn-builder">
+                                <div class="nn-layer">
+                                    <div class="nn-layer-label">Input</div>
+                                    <div class="nn-neuron input" onclick="activateNeuron(this)">I1</div>
+                                    <div class="nn-neuron input" onclick="activateNeuron(this)">I2</div>
+                                    <div class="nn-neuron input" onclick="activateNeuron(this)">I3</div>
+                                </div>
+                                <div class="nn-layer">
+                                    <div class="nn-layer-label">Hidden 1</div>
+                                    <div class="nn-neuron hidden" onclick="activateNeuron(this)">H1</div>
+                                    <div class="nn-neuron hidden" onclick="activateNeuron(this)">H2</div>
+                                    <div class="nn-neuron hidden" onclick="activateNeuron(this)">H3</div>
+                                    <div class="nn-neuron hidden" onclick="activateNeuron(this)">H4</div>
+                                </div>
+                                <div class="nn-layer">
+                                    <div class="nn-layer-label">Hidden 2</div>
+                                    <div class="nn-neuron hidden" onclick="activateNeuron(this)">H5</div>
+                                    <div class="nn-neuron hidden" onclick="activateNeuron(this)">H6</div>
+                                    <div class="nn-neuron hidden" onclick="activateNeuron(this)">H7</div>
+                                </div>
+                                <div class="nn-layer">
+                                    <div class="nn-layer-label">Output</div>
+                                    <div class="nn-neuron output" onclick="activateNeuron(this)">O1</div>
+                                    <div class="nn-neuron output" onclick="activateNeuron(this)">O2</div>
+                                </div>
+                            </div>
+                            <p style="font-size:0.85rem;color:var(--text-tertiary);margin-top:1rem;">Click neurons to see them activate! In real AI, data flows from input → hidden → output.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <p>💡 <strong>Fun Fact:</strong> GPT-4 (the AI behind ChatGPT) has over 1 TRILLION parameters (connections between neurons). The human brain has about 100 trillion synapses!</p>
+                    </div>
+                </div>
+
+                <!-- Module 4: How AI Learns -->
+                <div class="lesson-block animate-on-scroll">
+                    <h2><i class="fas fa-graduation-cap"></i> Module 4: How AI Learns</h2>
+                    <p>AI learns in three main ways, each suited for different types of problems:</p>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">1. Supervised Learning 👨‍🏫</h3>
+                    <p>The AI learns from labeled examples. Like a teacher showing flashcards — "this is a cat", "this is a dog".</p>
+                    <div class="highlight-box">
+                        <p>📌 Used in: Email spam detection, image recognition, language translation</p>
+                    </div>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">2. Unsupervised Learning 🔍</h3>
+                    <p>The AI finds patterns in data WITHOUT labels. It groups similar things together on its own.</p>
+                    <div class="highlight-box">
+                        <p>📌 Used in: Customer segmentation, recommendation systems, anomaly detection</p>
+                    </div>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">3. Reinforcement Learning 🎮</h3>
+                    <p>The AI learns by trial and error, getting rewards for good actions and penalties for bad ones. Like training a pet with treats!</p>
+                    <div class="highlight-box">
+                        <p>📌 Used in: Game AI, self-driving cars, robotics</p>
+                    </div>
+
+                    <!-- Interactive: Teach the AI -->
+                    <div class="interactive-demo">
+                        <h3>🎮 Interactive: Teach the AI!</h3>
+                        <div class="demo-area">
+                            <p>Label these items to train the AI (Supervised Learning)</p>
+                            <div id="teachingArea" style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:1rem 0;">
+                                <div class="teach-item" style="padding:15px 25px;background:var(--bg-card);border:2px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:var(--transition);" onclick="labelItem(this,'🐱 Cat')">🐱</div>
+                                <div class="teach-item" style="padding:15px 25px;background:var(--bg-card);border:2px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:var(--transition);" onclick="labelItem(this,'🐕 Dog')">🐕</div>
+                                <div class="teach-item" style="padding:15px 25px;background:var(--bg-card);border:2px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:var(--transition);" onclick="labelItem(this,'🐱 Cat')">😺</div>
+                                <div class="teach-item" style="padding:15px 25px;background:var(--bg-card);border:2px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:var(--transition);" onclick="labelItem(this,'🐕 Dog')">🐶</div>
+                                <div class="teach-item" style="padding:15px 25px;background:var(--bg-card);border:2px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:var(--transition);" onclick="labelItem(this,'🐱 Cat')">🐈</div>
+                            </div>
+                            <p id="labelCount" style="font-size:0.9rem;color:var(--text-tertiary);">Items labeled: 0/5</p>
+                            <p id="labelResult" style="font-weight:600;color:var(--success);display:none;">🎉 Great! The AI now knows the difference between cats and dogs!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 5: AI Technologies -->
+                <div class="lesson-block animate-on-scroll">
+                    <h2><i class="fas fa-microchip"></i> Module 5: Types of AI Technology</h2>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Natural Language Processing (NLP) 💬</h3>
+                    <p>NLP helps AI understand and generate human language. This is how ChatGPT, Google Translate, and Grammarly work.</p>
+                    <ul>
+                        <li>Text generation and understanding</li>
+                        <li>Sentiment analysis (detecting emotions in text)</li>
+                        <li>Language translation</li>
+                        <li>Chatbots and virtual assistants</li>
+                    </ul>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Computer Vision 👁️</h3>
+                    <p>Computer Vision helps AI "see" and understand images and videos. Used in face recognition, self-driving cars, and medical imaging.</p>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Generative AI 🎨</h3>
+                    <p>Generative AI creates new content — text, images, music, code. DALL-E, Midjourney, and ChatGPT are all generative AI models.</p>
+
+                    <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;">Speech Recognition 🎙️</h3>
+                    <p>Converts spoken language to text. Powers Siri, Alexa, Google Assistant, and voice typing.</p>
+
+                    <!-- Interactive Sentiment Analysis -->
+                    <div class="interactive-demo">
+                        <h3>🎮 Interactive: AI Sentiment Analyzer</h3>
+                        <div class="demo-area">
+                            <p>Type a sentence and the AI will detect the emotion!</p>
+                            <input type="text" id="sentimentInput" placeholder="Type something like 'I love learning AI!'" style="width:100%;max-width:400px;padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.95rem;">
+                            <button class="btn-primary" onclick="analyzeSentiment()">Analyze Sentiment</button>
+                            <div id="sentimentResult" style="font-size:1.5rem;display:none;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 6: AI in Real Life -->
+                <div class="lesson-block animate-on-scroll">
+                    <h2><i class="fas fa-globe"></i> Module 6: AI in Real Life</h2>
+                    <p>AI is everywhere around you! Here are real examples of AI you use daily:</p>
+
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;margin-top:1.5rem;">
+                        <div style="padding:1.5rem;background:var(--bg-tertiary);border-radius:var(--radius-md);">
+                            <h4 style="margin-bottom:0.5rem;">📱 Your Phone</h4>
+                            <p style="color:var(--text-secondary);font-size:0.9rem;">Face ID, voice assistants, auto-correct, photo enhancement</p>
+                        </div>
+                        <div style="padding:1.5rem;background:var(--bg-tertiary);border-radius:var(--radius-md);">
+                            <h4 style="margin-bottom:0.5rem;">🎬 Entertainment</h4>
+                            <p style="color:var(--text-secondary);font-size:0.9rem;">Netflix recommendations, Spotify playlists, YouTube suggestions</p>
+                        </div>
+                        <div style="padding:1.5rem;background:var(--bg-tertiary);border-radius:var(--radius-md);">
+                            <h4 style="margin-bottom:0.5rem;">🛒 Shopping</h4>
+                            <p style="color:var(--text-secondary);font-size:0.9rem;">Product recommendations, price predictions, chatbot support</p>
+                        </div>
+                        <div style="padding:1.5rem;background:var(--bg-tertiary);border-radius:var(--radius-md);">
+                            <h4 style="margin-bottom:0.5rem;">🏥 Healthcare</h4>
+                            <p style="color:var(--text-secondary);font-size:0.9rem;">Disease diagnosis, drug discovery, medical imaging</p>
+                        </div>
+                        <div style="padding:1.5rem;background:var(--bg-tertiary);border-radius:var(--radius-md);">
+                            <h4 style="margin-bottom:0.5rem;">🚗 Transportation</h4>
+                            <p style="color:var(--text-secondary);font-size:0.9rem;">Self-driving cars, traffic prediction, ride-sharing apps</p>
+                        </div>
+                        <div style="padding:1.5rem;background:var(--bg-tertiary);border-radius:var(--radius-md);">
+                            <h4 style="margin-bottom:0.5rem;">📚 Education</h4>
+                            <p style="color:var(--text-secondary);font-size:0.9rem;">AI tutors, personalized learning, automated grading</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         AI TOOLS PAGE
+         ============================================ -->
+    <div class="page" id="page-tools">
+        <div class="tools-page">
+            <div class="module-header">
+                <div class="container">
+                    <h1><span class="gradient-text">AI Tools for Education</span></h1>
+                    <p style="color:var(--text-secondary);max-width:600px;margin:0 auto;">Curated collection of AI tools that every student, teacher, and learner should know about</p>
+                </div>
+            </div>
+            <div class="container section">
+                <div class="tools-filter">
+                    <button class="filter-btn active" onclick="filterTools('all', this)">🔮 All Tools</button>
+                    <button class="filter-btn" onclick="filterTools('writing', this)">✍️ Writing</button>
+                    <button class="filter-btn" onclick="filterTools('research', this)">🔍 Research</button>
+                    <button class="filter-btn" onclick="filterTools('math', this)">🔢 Math & Science</button>
+                    <button class="filter-btn" onclick="filterTools('coding', this)">💻 Coding</button>
+                    <button class="filter-btn" onclick="filterTools('language', this)">🌍 Languages</button>
+                    <button class="filter-btn" onclick="filterTools('creative', this)">🎨 Creative</button>
+                    <button class="filter-btn" onclick="filterTools('study', this)">📖 Study</button>
+                    <button class="filter-btn" onclick="filterTools('tutor', this)">👨‍🏫 AI Tutors</button>
+                </div>
+
+                <div class="tools-grid" id="toolsGrid">
+                    <!-- Tools will be populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tool Detail Modal -->
+    <div class="modal-overlay" id="toolModal">
+        <div class="modal-content" id="toolModalContent">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <!-- Content populated by JS -->
+        </div>
+    </div>
+
+    <!-- ============================================
+         AI IN EDUCATION PAGE
+         ============================================ -->
+    <div class="page" id="page-education">
+        <div class="education-page">
+            <div class="module-header">
+                <div class="container">
+                    <h1><span class="gradient-text">AI in Education</span></h1>
+                    <p style="color:var(--text-secondary);max-width:600px;margin:0 auto;">Learn how to use AI effectively and ethically for studying, teaching, and academic success</p>
+                </div>
+            </div>
+            <div class="container section">
+                <div class="education-tabs">
+                    <button class="edu-tab active" onclick="switchEduTab('students', this)">🎓 For Students</button>
+                    <button class="edu-tab" onclick="switchEduTab('teachers', this)">👨‍🏫 For Teachers</button>
+                    <button class="edu-tab" onclick="switchEduTab('prompts', this)">✨ Prompt Library</button>
+                    <button class="edu-tab" onclick="switchEduTab('ethics', this)">⚖️ AI Ethics</button>
+                </div>
+
+                <!-- Students Tab -->
+                <div class="edu-content active" id="edu-students">
+                    <div class="edu-card">
+                        <h3><i class="fas fa-book"></i> Using AI for Homework & Assignments</h3>
+                        <p>AI can be an incredible study companion when used correctly. Here's how to use it ethically:</p>
+                        <ul>
+                            <li><strong>Research Assistant:</strong> Use AI to find information and understand topics, not to copy answers</li>
+                            <li><strong>Concept Explainer:</strong> Ask AI to explain difficult concepts in simple terms</li>
+                            <li><strong>Practice Problems:</strong> Generate practice questions to test your understanding</li>
+                            <li><strong>Writing Feedback:</strong> Get suggestions to improve YOUR writing (not write it for you)</li>
+                            <li><strong>Study Plans:</strong> Ask AI to create a personalized study schedule</li>
+                        </ul>
+                    </div>
+                    <div class="edu-card">
+                        <h3><i class="fas fa-brain"></i> AI-Powered Study Techniques</h3>
+                        <p>Supercharge your learning with these AI-assisted study methods:</p>
+                        <ul>
+                            <li><strong>Active Recall:</strong> Ask AI to quiz you on topics you've studied</li>
+                            <li><strong>Spaced Repetition:</strong> Use AI to create flashcard schedules</li>
+                            <li><strong>Feynman Technique:</strong> Explain concepts to AI and let it point out gaps</li>
+                            <li><strong>Mind Mapping:</strong> Ask AI to help organize topics visually</li>
+                            <li><strong>Summarization:</strong> Have AI summarize long chapters into key points</li>
+                        </ul>
+                    </div>
+                    <div class="edu-card">
+                        <h3><i class="fas fa-clipboard-check"></i> AI for Exam Preparation</h3>
+                        <p>Use AI strategically to prepare for exams:</p>
+                        <ul>
+                            <li>Generate practice tests on specific topics</li>
+                            <li>Ask AI to explain wrong answers from past tests</li>
+                            <li>Create mnemonic devices for memorization</li>
+                            <li>Simulate Q&A sessions for oral exams</li>
+                            <li>Get step-by-step solutions to practice problems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Teachers Tab -->
+                <div class="edu-content" id="edu-teachers">
+                    <div class="edu-card">
+                        <h3><i class="fas fa-chalkboard-teacher"></i> AI Tools for Lesson Planning</h3>
+                        <p>AI can help teachers create better learning experiences:</p>
+                        <ul>
+                            <li>Generate lesson plans tailored to curriculum standards</li>
+                            <li>Create differentiated activities for different learning levels</li>
+                            <li>Design interactive presentations with Canva AI or Tome</li>
+                            <li>Generate worksheets and handouts automatically</li>
+                            <li>Find creative ways to teach difficult concepts</li>
+                        </ul>
+                    </div>
+                    <div class="edu-card">
+                        <h3><i class="fas fa-tasks"></i> AI for Assessment & Grading</h3>
+                        <p>Save time and provide better feedback with AI:</p>
+                        <ul>
+                            <li>Auto-generate quizzes and rubrics</li>
+                            <li>Use AI to provide initial feedback on writing assignments</li>
+                            <li>Create personalized learning paths based on student performance</li>
+                            <li>Identify students who need extra help through AI analytics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Prompts Tab -->
+                <div class="edu-content" id="edu-prompts">
+                    <p style="text-align:center;color:var(--text-secondary);margin-bottom:2rem;">Copy these prompts and paste them into ChatGPT, Claude, or any AI assistant to supercharge your learning!</p>
+                    <div class="prompt-grid" id="promptGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Ethics Tab -->
+                <div class="edu-content" id="edu-ethics">
+                    <div class="edu-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> When NOT to Use AI</h3>
+                        <p>AI is powerful, but there are times when you should NOT rely on it:</p>
+                        <ul>
+                            <li>❌ <strong>Copying AI output as your own work</strong> — This is plagiarism</li>
+                            <li>❌ <strong>Blindly trusting AI answers</strong> — AI can be wrong (hallucinations)</li>
+                            <li>❌ <strong>Using AI during exams</strong> — Unless explicitly allowed</li>
+                            <li>❌ <strong>Replacing critical thinking</strong> — AI should assist, not replace your brain</li>
+                            <li>❌ <strong>Sharing personal/sensitive data</strong> — Be careful what you input</li>
+                        </ul>
+                    </div>
+                    <div class="edu-card">
+                        <h3><i class="fas fa-balance-scale"></i> Ethical AI Use Guidelines</h3>
+                        <p>Follow these principles for responsible AI use in education:</p>
+                        <ul>
+                            <li>✅ <strong>Be transparent</strong> — Tell your teacher if you used AI assistance</li>
+                            <li>✅ <strong>Use AI as a tool, not a crutch</strong> — Learn the concept, don't just get the answer</li>
+                            <li>✅ <strong>Verify AI output</strong> — Always fact-check important information</li>
+                            <li>✅ <strong>Cite AI usage</strong> — Give credit when AI helped your work</li>
+                            <li>✅ <strong>Understand your school's policy</strong> — Different institutions have different rules</li>
+                        </ul>
+                    </div>
+                    <div class="edu-card">
+                        <h3><i class="fas fa-quote-left"></i> How to Cite AI-Generated Content</h3>
+                        <p>If your school allows AI use, here's how to cite it properly:</p>
+                        <div class="highlight-box">
+                            <p><strong>APA Format:</strong><br>
+                            OpenAI. (2024). ChatGPT (GPT-4) [Large language model]. https://chat.openai.com</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p><strong>MLA Format:</strong><br>
+                            "Describe the topic" prompt. ChatGPT, GPT-4, OpenAI, 15 Dec. 2024, chat.openai.com.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         BLOG PAGE
+         ============================================ -->
+    <div class="page" id="page-blog">
+        <div class="blog-page">
+            <div class="module-header">
+                <div class="container">
+                    <h1><span class="gradient-text">AI Education Blog</span></h1>
+                    <p style="color:var(--text-secondary);max-width:600px;margin:0 auto;">Latest insights, tutorials, and news about AI in education</p>
+                </div>
+            </div>
+            <div class="container section">
+                <div class="blog-grid" id="blogGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         DASHBOARD PAGE
+         ============================================ -->
+    <div class="page" id="page-dashboard">
+        <div class="dashboard-page">
+            <div class="container section">
+                <div class="dashboard-grid">
+                    <div class="dashboard-sidebar">
+                        <div class="user-profile">
+                            <div class="user-avatar">👤</div>
+                            <h3>AI Learner</h3>
+                            <p>learner@aieduhub.com</p>
+                            <span class="user-level">🌟 Level 5 - Explorer</span>
+                        </div>
+                        <div class="sidebar-menu">
+                            <a href="#" class="active"><i class="fas fa-chart-pie"></i> Overview</a>
+                            <a href="#"><i class="fas fa-book"></i> My Courses</a>
+                            <a href="#"><i class="fas fa-tools"></i> My Tools</a>
+                            <a href="#"><i class="fas fa-trophy"></i> Achievements</a>
+                            <a href="#"><i class="fas fa-bookmark"></i> Bookmarks</a>
+                            <a href="#"><i class="fas fa-sticky-note"></i> Notes</a>
+                            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        </div>
+                    </div>
+                    <div class="dashboard-main">
+                        <div class="dash-stats">
+                            <div class="dash-stat-card">
+                                <i class="fas fa-book-open"></i>
+                                <div class="stat-number" style="color:var(--primary)">12</div>
+                                <div class="stat-label">Lessons Done</div>
+                            </div>
+                            <div class="dash-stat-card">
+                                <i class="fas fa-fire" style="color:var(--error)"></i>
+                                <div class="stat-number" style="color:var(--error)">7</div>
+                                <div class="stat-label">Day Streak 🔥</div>
+                            </div>
+                            <div class="dash-stat-card">
+                                <i class="fas fa-star" style="color:var(--accent)"></i>
+                                <div class="stat-number" style="color:var(--accent)">850</div>
+                                <div class="stat-label">XP Earned</div>
+                            </div>
+                            <div class="dash-stat-card">
+                                <i class="fas fa-trophy" style="color:var(--success)"></i>
+                                <div class="stat-number" style="color:var(--success)">5</div>
+                                <div class="stat-label">Badges</div>
+                            </div>
+                        </div>
+
+                        <div class="dash-section">
+                            <h3><i class="fas fa-book"></i> Current Learning Progress</h3>
+                            <div class="course-progress-item">
+                                <div class="course-info">
+                                    <h4>Module 1: What is AI?</h4>
+                                    <div class="progress-container"><div class="progress-bar" style="width:100%"></div></div>
+                                </div>
+                                <span class="progress-percent">100%</span>
+                            </div>
+                            <div class="course-progress-item">
+                                <div class="course-info">
+                                    <h4>Module 2: How AI is Built</h4>
+                                    <div class="progress-container"><div class="progress-bar" style="width:75%"></div></div>
+                                </div>
+                                <span class="progress-percent">75%</span>
+                            </div>
+                            <div class="course-progress-item">
+                                <div class="course-info">
+                                    <h4>Module 3: Neural Networks</h4>
+                                    <div class="progress-container"><div class="progress-bar" style="width:40%"></div></div>
+                                </div>
+                                <span class="progress-percent">40%</span>
+                            </div>
+                            <div class="course-progress-item">
+                                <div class="course-info">
+                                    <h4>Module 4: How AI Learns</h4>
+                                    <div class="progress-container"><div class="progress-bar" style="width:10%"></div></div>
+                                </div>
+                                <span class="progress-percent">10%</span>
+                            </div>
+                        </div>
+
+                        <div class="dash-section">
+                            <h3><i class="fas fa-trophy"></i> Achievements</h3>
+                            <div class="badge-grid">
+                                <div class="badge-item"><div class="badge-icon">🚀</div><div class="badge-name">First Lesson</div></div>
+                                <div class="badge-item"><div class="badge-icon">🧠</div><div class="badge-name">AI Curious</div></div>
+                                <div class="badge-item"><div class="badge-icon">📝</div><div class="badge-name">Quiz Master</div></div>
+                                <div class="badge-item"><div class="badge-icon">🔥</div><div class="badge-name">3-Day Streak</div></div>
+                                <div class="badge-item"><div class="badge-icon">⭐</div><div class="badge-name">Explorer</div></div>
+                                <div class="badge-item locked"><div class="badge-icon">🏆</div><div class="badge-name">AI Expert</div></div>
+                                <div class="badge-item locked"><div class="badge-icon">💎</div><div class="badge-name">Master</div></div>
+                                <div class="badge-item locked"><div class="badge-icon">👑</div><div class="badge-name">Legend</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         CONTACT PAGE
+         ============================================ -->
+    <div class="page" id="page-contact">
+        <div class="contact-page">
+            <div class="module-header">
+                <div class="container">
+                    <h1><span class="gradient-text">Contact Us</span></h1>
+                    <p style="color:var(--text-secondary);max-width:600px;margin:0 auto;">Have questions, suggestions, or want to collaborate? We'd love to hear from you!</p>
+                </div>
+            </div>
+            <div class="container section">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2>Get in Touch</h2>
+                        <p>Whether you're a student looking for help, a teacher wanting to integrate AI, or just curious about AI — reach out to us!</p>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                            <div><h4>Email</h4><p>hello@aieduhub.com</p></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div><h4>Location</h4><p>Available Worldwide 🌍</p></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+                            <div><h4>Response Time</h4><p>Within 24 hours</p></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-share-alt"></i></div>
+                            <div>
+                                <h4>Follow Us</h4>
+                                <div class="footer-social" style="margin-top:8px;">
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                    <a href="#"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Your name" id="contactName">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="your@email.com" id="contactEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select id="contactSubject">
+                                <option value="">Select a topic</option>
+                                <option>General Inquiry</option>
+                                <option>Bug Report</option>
+                                <option>Feature Request</option>
+                                <option>Collaboration</option>
+                                <option>AI Tool Suggestion</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea placeholder="Tell us what's on your mind..." id="contactMessage"></textarea>
+                        </div>
+                        <button class="btn-primary" style="width:100%" onclick="submitContact()">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        <div class="form-success" id="contactSuccess">✅ Message sent successfully! We'll get back to you within 24 hours.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         LOGIN PAGE
+         ============================================ -->
+    <div class="page" id="page-login">
+        <div class="auth-page">
+            <div class="auth-card">
+                <h2><span class="gradient-text">Welcome Back</span></h2>
+                <p class="auth-subtitle">Sign in to track your AI learning journey</p>
+                <div class="social-login">
+                    <button class="social-btn"><i class="fab fa-google"></i></button>
+                    <button class="social-btn"><i class="fab fa-github"></i></button>
+                    <button class="social-btn"><i class="fab fa-microsoft"></i></button>
+                </div>
+                <div class="auth-divider">or continue with email</div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <button class="btn-primary" style="width:100%" onclick="handleLogin()">Sign In</button>
+                <p class="auth-toggle">
+                    Don't have an account? <a href="#" onclick="toggleAuth()">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer" id="mainFooter">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><span class="gradient-text"><i class="fas fa-brain"></i> AI EduHub</span></h3>
+                    <p>Your complete platform for understanding AI and using it to supercharge your education. Learn how AI works, discover the best AI tools, and master AI-powered learning.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Get weekly AI tips">
+                        <button onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Learn</h4>
+                    <a href="#" onclick="navigateTo('how-ai-works')">What is AI?</a>
+                    <a href="#" onclick="navigateTo('how-ai-works')">How AI is Built</a>
+                    <a href="#" onclick="navigateTo('how-ai-works')">Neural Networks</a>
+                    <a href="#" onclick="navigateTo('how-ai-works')">How AI Learns</a>
+                    <a href="#" onclick="navigateTo('how-ai-works')">AI Technologies</a>
+                </div>
+                <div class="footer-column">
+                    <h4>AI Tools</h4>
+                    <a href="#" onclick="navigateTo('tools')">Writing Tools</a>
+                    <a href="#" onclick="navigateTo('tools')">Research Tools</a>
+                    <a href="#" onclick="navigateTo('tools')">Math & Science</a>
+                    <a href="#" onclick="navigateTo('tools')">Coding Tools</a>
+                    <a href="#" onclick="navigateTo('tools')">AI Tutors</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="#" onclick="navigateTo('education')">For Students</a>
+                    <a href="#" onclick="navigateTo('education')">For Teachers</a>
+                    <a href="#" onclick="navigateTo('education')">Prompt Library</a>
+                    <a href="#" onclick="navigateTo('blog')">Blog</a>
+                    <a href="#" onclick="navigateTo('contact')">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 AI Education Hub. Built with 💜 for learners everywhere.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-header-avatar"><i class="fas fa-robot"></i></div>
+                <div class="chat-header-info">
+                    <h4>AI Assistant</h4>
+                    <p>Always here to help you learn!</p>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot">
+                    👋 Hi! I'm your AI learning assistant. Ask me anything about AI, or try these:
+                    <br><br>
+                    • "What is machine learning?"<br>
+                    • "Best AI tools for studying"<br>
+                    • "How does ChatGPT work?"
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" placeholder="Ask me about AI..." id="chatInput" onkeypress="if(event.key==='Enter')sendChat()">
+                <button class="chat-send" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-comment-dots" id="chatIcon"></i>
+            <span class="chat-badge">1</span>
+        </button>
+    </div>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+// ============================================
+// DATA
+// ============================================
+
+const aiTools = [
+    {
+        name: "ChatGPT",
+        category: "writing",
+        categories: ["writing", "research", "study", "tutor"],
+        icon: "fas fa-comment-dots",
+        color: "#10A37F",
+        description: "The most popular AI chatbot. Perfect for Q&A, essay help, brainstorming, explaining concepts, and learning assistance.",
+        bestFor: "Best for: Essays, Q&A, Explanations, Brainstorming",
+        pricing: "freemium",
+        rating: 4.8,
+        tags: ["Chatbot", "Writing", "Research", "Free Tier"],
+        pros: ["Incredibly versatile", "Great at explaining concepts", "Free tier available", "Supports many languages"],
+        cons: ["Can generate incorrect info", "Knowledge cutoff date", "Premium features require subscription"],
+        link: "https://chat.openai.com",
+        howToUse: "Sign up at chat.openai.com, type your question, and get instant AI-powered answers. Use clear, specific prompts for best results."
+    },
+    {
+        name: "Claude",
+        category: "writing",
+        categories: ["writing", "research", "coding"],
+        icon: "fas fa-feather",
+        color: "#D4A574",
+        description: "Anthropic's AI assistant known for long-form analysis, careful reasoning, and handling complex research tasks.",
+        bestFor: "Best for: Long research, Analysis, Complex writing",
+        pricing: "freemium",
+        rating: 4.7,
+        tags: ["Research", "Analysis", "Long-form", "Coding"],
+        pros: ["Excellent at long documents", "Very careful and accurate", "Great for analysis", "Strong coding abilities"],
+        cons: ["Slower than ChatGPT sometimes", "Limited free tier", "Smaller ecosystem"],
+        link: "https://claude.ai",
+        howToUse: "Visit claude.ai, create an account, and start chatting. Claude excels when you provide detailed context and ask for thorough analysis."
+    },
+    {
+        name: "Perplexity AI",
+        category: "research",
+        categories: ["research", "study"],
+        icon: "fas fa-search",
+        color: "#22D3EE",
+        description: "An AI-powered research engine that provides answers with cited sources. Perfect for academic research and fact-checking.",
+        bestFor: "Best for: Research with sources, Fact-checking",
+        pricing: "freemium",
+        rating: 4.6,
+        tags: ["Research", "Sources", "Academic", "Free"],
+        pros: ["Cites sources for every answer", "Real-time web search", "Great for academic research", "Free to use"],
+        cons: ["Less creative than ChatGPT", "Can sometimes miss context", "Pro features limited"],
+        link: "https://perplexity.ai",
+        howToUse: "Go to perplexity.ai and type your research question. It will search the web and provide sourced answers perfect for papers and projects."
+    },
+    {
+        name: "Wolfram Alpha",
+        category: "math",
+        categories: ["math"],
+        icon: "fas fa-calculator",
+        color: "#F97316",
+        description: "The ultimate computational engine for math, science, and engineering problems. Shows step-by-step solutions.",
+        bestFor: "Best for: Math problems, Science calculations, Statistics",
+        pricing: "freemium",
+        rating: 4.7,
+        tags: ["Math", "Science", "Step-by-step", "Calculations"],
+        pros: ["Incredibly accurate for math", "Step-by-step solutions", "Covers all math levels", "Trusted by academics"],
+        cons: ["Interface can be complex", "Premium for step-by-step", "Not great for non-STEM topics"],
+        link: "https://wolframalpha.com",
+        howToUse: "Type any math equation, scientific query, or data question into Wolfram Alpha and get computed answers with visualizations."
+    },
+    {
+        name: "Photomath",
+        category: "math",
+        categories: ["math", "tutor"],
+        icon: "fas fa-camera",
+        color: "#EF4444",
+        description: "Point your camera at any math problem and get instant step-by-step solutions. Perfect for homework help.",
+        bestFor: "Best for: Homework math problems, Step-by-step learning",
+        pricing: "freemium",
+        rating: 4.5,
+        tags: ["Math", "Camera", "Homework", "Mobile"],
+        pros: ["Scan problems with camera", "Clear step-by-step solutions", "Covers algebra to calculus", "Great for visual learners"],
+        cons: ["Mobile only", "Some features require premium", "Struggles with handwriting sometimes"],
+        link: "https://photomath.com",
+        howToUse: "Download the app, point your camera at a math problem, and get instant step-by-step solutions explained clearly."
+    },
+    {
+        name: "GitHub Copilot",
+        category: "coding",
+        categories: ["coding"],
+        icon: "fas fa-code",
+        color: "#7C3AED",
+        description: "AI pair programmer that suggests code as you type. Supports all major programming languages and IDEs.",
+        bestFor: "Best for: Code completion, Learning to code, Debugging",
+        pricing: "paid",
+        rating: 4.6,
+        tags: ["Coding", "Programming", "IDE", "Autocomplete"],
+        pros: ["Works in your IDE", "Supports many languages", "Great code suggestions", "Free for students"],
+        cons: ["Paid for non-students", "Sometimes suggests incorrect code", "Requires IDE setup"],
+        link: "https://github.com/features/copilot",
+        howToUse: "Install the Copilot extension in VS Code, start typing code, and it will suggest completions. Students get it free!"
+    },
+    {
+        name: "Replit AI",
+        category: "coding",
+        categories: ["coding", "tutor"],
+        icon: "fas fa-terminal",
+        color: "#F26722",
+        description: "Online IDE with built-in AI that helps you write, debug, and understand code. No setup needed!",
+        bestFor: "Best for: Beginners learning to code, Quick projects",
+        pricing: "freemium",
+        rating: 4.4,
+        tags: ["Coding", "Online IDE", "Beginner-friendly", "Free"],
+        pros: ["No setup required", "AI explains code", "Collaborative coding", "Free tier available"],
+        cons: ["Can be slow on free tier", "Limited resources on free plan", "Internet connection required"],
+        link: "https://replit.com",
+        howToUse: "Sign up at replit.com, create a new project in any language, and use the AI assistant to help you write and understand code."
+    },
+    {
+        name: "Duolingo",
+        category: "language",
+        categories: ["language", "tutor"],
+        icon: "fas fa-language",
+        color: "#58CC02",
+        description: "AI-powered language learning app with personalized lessons, speaking practice, and gamified learning.",
+        bestFor: "Best for: Learning new languages, Daily practice",
+        pricing: "freemium",
+        rating: 4.5,
+        tags: ["Languages", "Gamified", "Speaking", "Mobile"],
+        pros: ["Fun and engaging", "AI adapts to your level", "Many languages available", "Free to use"],
+        cons: ["Repetitive exercises", "Not great for advanced learners", "Premium for all features"],
+        link: "https://duolingo.com",
+        howToUse: "Download the app or visit duolingo.com, choose a language, and start daily lessons. The AI adapts difficulty to your level."
+    },
+    {
+        name: "Canva AI",
+        category: "creative",
+        categories: ["creative", "study"],
+        icon: "fas fa-palette",
+        color: "#00C4CC",
+        description: "AI-powered design platform for creating presentations, posters, social media graphics, and study materials.",
+        bestFor: "Best for: Presentations, Design, Study materials",
+        pricing: "freemium",
+        rating: 4.6,
+        tags: ["Design", "Presentations", "Creative", "Free"],
+        pros: ["Easy to use", "AI generates designs", "Great templates", "Free tier is generous"],
+        cons: ["Some elements are premium", "Less control than Photoshop", "Requires internet"],
+        link: "https://canva.com",
+        howToUse: "Visit canva.com, describe what you want to create, and AI will generate designs. Perfect for school presentations and projects."
+    },
+    {
+        name: "Khanmigo",
+        category: "tutor",
+        categories: ["tutor", "math", "study"],
+        icon: "fas fa-user-graduate",
+        color: "#14BF96",
+        description: "Khan Academy's AI tutor that guides you through learning without giving direct answers. Like having a personal tutor!",
+        bestFor: "Best for: Math tutoring, Guided learning, All subjects",
+        pricing: "freemium",
+        rating: 4.7,
+        tags: ["Tutor", "Math", "All Subjects", "Guided Learning"],
+        pros: ["Teaches, doesn't just give answers", "Covers all subjects", "Backed by Khan Academy", "Socratic method approach"],
+        cons: ["Requires Khan Academy account", "Some features are premium", "May be slow for quick answers"],
+        link: "https://khanacademy.org",
+        howToUse: "Sign up at Khan Academy, access Khanmigo, and ask for help with any subject. It guides you to the answer instead of giving it directly."
+    },
+    {
+        name: "Grammarly",
+        category: "writing",
+        categories: ["writing"],
+        icon: "fas fa-spell-check",
+        color: "#15C39A",
+        description: "AI writing assistant that checks grammar, spelling, tone, and clarity. Works everywhere you write.",
+        bestFor: "Best for: Grammar checking, Writing improvement, Essays",
+        pricing: "freemium",
+        rating: 4.5,
+        tags: ["Writing", "Grammar", "Chrome Extension", "Free"],
+        pros: ["Works everywhere", "Great grammar checking", "Tone suggestions", "Free version is useful"],
+        cons: ["Premium is expensive", "Sometimes over-corrects", "Privacy concerns with input data"],
+        link: "https://grammarly.com",
+        howToUse: "Install the browser extension and Grammarly will check your writing in real-time on any website — emails, docs, essays, everything."
+    },
+    {
+        name: "Quillbot",
+        category: "writing",
+        categories: ["writing", "study"],
+        icon: "fas fa-sync-alt",
+        color: "#4CAF50",
+        description: "AI paraphrasing and summarizing tool. Great for rephrasing text, understanding articles, and improving writing style.",
+        bestFor: "Best for: Paraphrasing, Summarizing, Note-taking",
+        pricing: "freemium",
+        rating: 4.3,
+        tags: ["Paraphrasing", "Summarizing", "Writing", "Free"],
+        pros: ["Multiple paraphrasing modes", "Good summarizer", "Grammar checker included", "Free tier available"],
+        cons: ["Character limit on free tier", "Sometimes changes meaning", "Premium for best modes"],
+        link: "https://quillbot.com",
+        howToUse: "Paste text into QuillBot, choose a paraphrasing mode (Standard, Fluency, Creative), and get rewritten text instantly."
+    },
+    {
+        name: "Otter.ai",
+        category: "study",
+        categories: ["study"],
+        icon: "fas fa-microphone",
+        color: "#3B82F6",
+        description: "AI-powered transcription tool that records and transcribes lectures, meetings, and conversations in real-time.",
+        bestFor: "Best for: Lecture transcription, Meeting notes, Study",
+        pricing: "freemium",
+        rating: 4.4,
+        tags: ["Transcription", "Lectures", "Notes", "Audio"],
+        pros: ["Real-time transcription", "Highlights key points", "Searchable notes", "Free monthly minutes"],
+        cons: ["Accuracy varies with accents", "Limited free minutes", "Best with clear audio"],
+        link: "https://otter.ai",
+        howToUse: "Record your lecture with Otter.ai and get an automatic transcript with key points highlighted. Search through notes easily later."
+    },
+    {
+        name: "Socratic by Google",
+        category: "tutor",
+        categories: ["tutor", "math", "study"],
+        icon: "fas fa-graduation-cap",
+        color: "#4285F4",
+        description: "Google's AI homework helper. Take a photo of your question and get visual explanations and relevant resources.",
+        bestFor: "Best for: Homework help, Visual explanations, Quick answers",
+        pricing: "free",
+        rating: 4.3,
+        tags: ["Homework", "Free", "Visual", "Google"],
+        pros: ["Completely free", "Visual explanations", "Works with camera", "Backed by Google"],
+        cons: ["Limited to common topics", "Not as powerful as ChatGPT", "Mobile only"],
+        link: "https://socratic.org",
+        howToUse: "Download the Socratic app, take a photo of your homework question, and get visual step-by-step explanations and resources."
+    },
+    {
+        name: "DALL-E / ChatGPT Image",
+        category: "creative",
+        categories: ["creative"],
+        icon: "fas fa-image",
+        color: "#FF6B6B",
+        description: "OpenAI's image generation AI. Create any image from a text description. Great for school projects and presentations.",
+        bestFor: "Best for: Image generation, Presentations, Creative projects",
+        pricing: "freemium",
+        rating: 4.5,
+        tags: ["Image Generation", "Creative", "Presentations"],
+        pros: ["Creates any image you describe", "High quality", "Available in ChatGPT", "Great for projects"],
+        cons: ["Sometimes inaccurate", "Limited free generations", "Can't perfectly replicate styles"],
+        link: "https://openai.com/dall-e",
+        howToUse: "Open ChatGPT, describe the image you want (be specific!), and DALL-E will generate it. Great for presentation visuals."
+    },
+    {
+        name: "SciSpace",
+        category: "research",
+        categories: ["research", "study"],
+        icon: "fas fa-flask",
+        color: "#8B5CF6",
+        description: "AI tool for reading and understanding research papers. Explains complex sections, extracts key data, and summarizes papers.",
+        bestFor: "Best for: Reading research papers, Academic writing",
+        pricing: "freemium",
+        rating: 4.4,
+        tags: ["Research Papers", "Academic", "Summarizer"],
+        pros: ["Explains complex papers", "Highlights key findings", "Citation help", "Free basic access"],
+        cons: ["Limited free queries", "Works best with English papers", "Niche use case"],
+        link: "https://typeset.io",
+        howToUse: "Upload a research paper to SciSpace, and the AI will explain complex sections, extract key data, and answer your questions about it."
+    }
+];
+
+const blogPosts = [
+    { title: "How ChatGPT Actually Works - A Simple Explanation", excerpt: "Ever wondered how ChatGPT understands you and generates human-like text? We break down transformers, tokens, and training in simple terms anyone can understand.", icon: "fas fa-robot", gradient: "linear-gradient(135deg, #7C3AED, #06B6D4)", tag: "AI Basics", readTime: "8 min", date: "Dec 2024" },
+    { title: "10 Ways Students Can Use AI Ethically in 2025", excerpt: "AI can supercharge your learning without crossing ethical lines. Here are the best practices every student should follow when using AI tools.", icon: "fas fa-graduation-cap", gradient: "linear-gradient(135deg, #F59E0B, #EF4444)", tag: "Education", readTime: "6 min", date: "Dec 2024" },
+    { title: "The Best Free AI Tools Every Student Needs", excerpt: "You don't need to spend a penny to access powerful AI. Here's our curated list of the best free AI tools for studying, writing, and research.", icon: "fas fa-tools", gradient: "linear-gradient(135deg, #10B981, #3B82F6)", tag: "Tools", readTime: "10 min", date: "Nov 2024" },
+    { title: "Neural Networks Explained Like You're 10", excerpt: "Neural networks sound scary, but they're actually pretty simple. Imagine a group of friends passing notes in class... that's basically how they work!", icon: "fas fa-brain", gradient: "linear-gradient(135deg, #EC4899, #8B5CF6)", tag: "AI Basics", readTime: "5 min", date: "Nov 2024" },
+    { title: "AI vs Human: What Can AI Really Do Better?", excerpt: "AI beats humans at chess and calculations, but fails at common sense and creativity. Let's explore the real strengths and weaknesses of AI.", icon: "fas fa-balance-scale", gradient: "linear-gradient(135deg, #F97316, #FCD34D)", tag: "Deep Dive", readTime: "7 min", date: "Oct 2024" },
+    { title: "How to Write Perfect AI Prompts for Studying", excerpt: "The quality of AI output depends on your input. Master the art of prompt engineering with these techniques specifically designed for students.", icon: "fas fa-magic", gradient: "linear-gradient(135deg, #6366F1, #EC4899)", tag: "Tips", readTime: "9 min", date: "Oct 2024" }
+];
+
+const prompts = [
+    { title: "Explain Like I'm 10", prompt: "Explain [TOPIC] in simple terms as if I'm a 10-year-old. Use everyday examples and analogies.", use: "Understanding complex concepts" },
+    { title: "Create a Study Plan", prompt: "Create a 2-week study plan for [SUBJECT/EXAM]. Include daily goals, key topics, practice exercises, and review sessions.", use: "Exam preparation" },
+    { title: "Quiz Me", prompt: "Create 10 multiple-choice questions about [TOPIC] at a [beginner/intermediate/advanced] level. Include answers and explanations.", use: "Self-testing & revision" },
+    { title: "Summarize This", prompt: "Summarize the following text in 5 key bullet points. Focus on the main ideas and important details: [PASTE TEXT]", use: "Quick understanding of long texts" },
+    { title: "Debug My Code", prompt: "I have this code that's not working. Please find the bug, explain why it's happening, and show me the fixed version: [PASTE CODE]", use: "Programming homework help" },
+    { title: "Essay Outline", prompt: "Create a detailed outline for a [WORD COUNT]-word essay on [TOPIC]. Include thesis statement, main arguments, evidence suggestions, and conclusion.", use: "Essay writing preparation" },
+    { title: "Flashcard Generator", prompt: "Create 20 flashcards (question and answer format) for the topic: [TOPIC]. Make them progressively harder.", use: "Memorization & active recall" },
+    { title: "Compare & Contrast", prompt: "Create a detailed comparison between [THING 1] and [THING 2]. Include similarities, differences, pros, cons, and when to use each.", use: "Analysis assignments" },
+    { title: "Practice Problems", prompt: "Generate 10 practice problems for [MATH/SCIENCE TOPIC] at [difficulty level]. Show solutions step-by-step after each problem.", use: "Math & Science practice" },
+    { title: "Feynman Technique", prompt: "I'm going to explain [TOPIC] to you. Point out any gaps in my understanding, incorrect statements, or areas I should study more: [YOUR EXPLANATION]", use: "Deep understanding check" },
+    { title: "Make It Visual", prompt: "Describe [CONCEPT] using a visual analogy or metaphor. Then create a simple diagram description I could draw to remember it.", use: "Visual learning" },
+    { title: "Research Assistant", prompt: "I'm writing a paper about [TOPIC]. Suggest 5 key areas to research, potential arguments for and against, and types of sources I should look for.", use: "Research planning" }
+];
+
+// AI Quiz Data
+const aiQuizData = [
+    { question: "Is a calculator an example of AI?", answer: false, explanation: "❌ No! A calculator follows fixed rules. AI learns and adapts from data." },
+    { question: "Is Netflix's recommendation system AI?", answer: true, explanation: "✅ Yes! Netflix uses machine learning to learn your preferences and suggest shows." },
+    { question: "Is a traffic light AI?", answer: false, explanation: "❌ No! Basic traffic lights follow a timer. (Smart traffic lights with sensors could be AI though!)" },
+    { question: "Is Siri/Alexa an example of AI?", answer: true, explanation: "✅ Yes! They use NLP to understand speech and provide intelligent responses." },
+    { question: "Is a microwave AI?", answer: false, explanation: "❌ No! A microwave follows preset instructions. It doesn't learn or adapt." },
+    { question: "Is Spam email detection AI?", answer: true, explanation: "✅ Yes! Email filters use machine learning to identify and block spam patterns." }
+];
+let aiQuizIndex = 0;
+
+// Chatbot responses
+const chatResponses = {
+    "what is ai": "🤖 AI (Artificial Intelligence) is the simulation of human intelligence by computers. It allows machines to learn from data, recognize patterns, make decisions, and even generate creative content! Think of it as teaching a computer to think. Want to learn more? Check out our 'How AI Works' section!",
+    "what is machine learning": "📊 Machine Learning is a subset of AI where computers learn from data without being explicitly programmed. Instead of writing rules, you give the machine examples and it figures out the patterns itself! There are 3 main types: Supervised, Unsupervised, and Reinforcement Learning.",
+    "how does chatgpt work": "💬 ChatGPT works using a 'Transformer' neural network trained on billions of text examples. It predicts the next word in a sequence based on patterns it learned. It doesn't truly 'understand' — it's incredibly good at pattern matching! Learn more in our Neural Networks module.",
+    "best ai tools for studying": "📚 Here are the top AI tools for students:\n\n1. ChatGPT - Q&A & explanations\n2. Perplexity - Research with sources\n3. Wolfram Alpha - Math problems\n4. Grammarly - Writing improvement\n5. Khanmigo - Personal AI tutor\n6. Otter.ai - Lecture transcription\n\nCheck our Tools section for the full list!",
+    "what is neural network": "🧠 A Neural Network is a computing system inspired by the human brain. It has layers of 'neurons' that process information:\n\n• Input Layer → receives data\n• Hidden Layers → find patterns\n• Output Layer → gives results\n\nTry our interactive Neural Network builder in the 'How AI Works' section!",
+    "default": "🤔 Great question! I'm a simple demo chatbot, but I can help with basics about AI. Try asking:\n\n• 'What is AI?'\n• 'What is machine learning?'\n• 'How does ChatGPT work?'\n• 'Best AI tools for studying'\n• 'What is neural network'\n\nFor more detailed learning, explore our modules!"
+};
+
+// ============================================
+// NAVIGATION
+// ============================================
+
+function navigateTo(page) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+    // Show target page
+    const targetPage = document.getElementById('page-' + page);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
+
+    // Update nav links
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const activeLink = document.querySelector(`.nav-links a[data-page="${page}"]`);
+    if (activeLink) activeLink.classList.add('active');
+
+    // Show/hide footer (hide on login)
+    const footer = document.getElementById('mainFooter');
+    footer.style.display = page === 'login' ? 'none' : 'block';
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Close mobile menu
+    document.getElementById('navLinks').classList.remove('mobile-open');
+    document.getElementById('mobileToggle').classList.remove('active');
+
+    // Init page-specific content
+    if (page === 'tools') renderTools('all');
+    if (page === 'blog') renderBlog();
+    if (page === 'education') renderPrompts();
+
+    // Trigger scroll animations
+    setTimeout(initScrollAnimations, 100);
+}
+
+// ============================================
+// THEME TOGGLE
+// ============================================
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const icon = document.querySelector('#themeToggle i');
+    if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        icon.className = 'fas fa-sun';
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        icon.className = 'fas fa-moon';
+    }
+}
+
+// ============================================
+// MOBILE MENU
+// ============================================
+
+function toggleMobileMenu() {
+    document.getElementById('navLinks').classList.toggle('mobile-open');
+    document.getElementById('mobileToggle').classList.toggle('active');
+}
+
+// ============================================
+// PARTICLES BACKGROUND
+// ============================================
+
+function initParticles() {
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const particleCount = 50;
+
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            opacity: Math.random() * 0.5 + 0.1
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach((p, i) => {
+            p.x += p.speedX;
+            p.y += p.speedY;
+
+            if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(124, 58, 237, ${p.opacity})`;
+            ctx.fill();
+
+            // Connect nearby particles
+            particles.forEach((p2, j) => {
+                if (i === j) return;
+                const dx = p.x - p2.x;
+                const dy = p.y - p2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = `rgba(124, 58, 237, ${0.1 * (1 - dist / 150)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            });
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
+// ============================================
+// NEURAL NETWORK SVG
+// ============================================
+
+function initNeuralNetwork() {
+    const svg = document.getElementById('neuralNetSvg');
+    if (!svg) return;
+
+    const layers = [
+        { neurons: 4, x: 80 },
+        { neurons: 6, x: 170 },
+        { neurons: 6, x: 260 },
+        { neurons: 3, x: 350 }
+    ];
+
+    let svgContent = '';
+
+    // Draw connections
+    for (let l = 0; l < layers.length - 1; l++) {
+        for (let i = 0; i < layers[l].neurons; i++) {
+            for (let j = 0; j < layers[l + 1].neurons; j++) {
+                const y1 = 200 - (layers[l].neurons * 25) + i * 50 + 25;
+                const y2 = 200 - (layers[l + 1].neurons * 25) + j * 50 + 25;
+                svgContent += `<line class="neural-line" x1="${layers[l].x}" y1="${y1}" x2="${layers[l + 1].x}" y2="${y2}" style="animation-delay:${Math.random() * 2}s"/>`;
+            }
+        }
+    }
+
+    // Draw neurons
+    layers.forEach((layer, l) => {
+        for (let i = 0; i < layer.neurons; i++) {
+            const y = 200 - (layer.neurons * 25) + i * 50 + 25;
+            const colors = ['#3B82F6', '#7C3AED', '#7C3AED', '#10B981'];
+            svgContent += `<circle class="neural-node" cx="${layer.x}" cy="${y}" r="8" fill="${colors[l]}" style="animation-delay:${Math.random() * 3}s"/>`;
+        }
+    });
+
+    svg.innerHTML = svgContent;
+}
+
+// ============================================
+// SCROLL ANIMATIONS
+// ============================================
+
+function initScrollAnimations() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    elements.forEach(el => observer.observe(el));
+}
+
+// ============================================
+// NAVBAR SCROLL EFFECT
+// ============================================
+
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    const scrollTop = document.getElementById('scrollTopBtn');
+
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+
+    if (window.scrollY > 400) {
+        scrollTop.classList.add('visible');
+    } else {
+        scrollTop.classList.remove('visible');
+    }
+});
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================
+// COUNTER ANIMATION
+// ============================================
+
+function animateCounters() {
+    const counters = document.querySelectorAll('.hero-stat .number, .stat-number');
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        if (!target) return;
+        const increment = target / 100;
+        let current = 0;
+
+        const update = () => {
+            current += increment;
+            if (current < target) {
+                counter.textContent = Math.ceil(current) + (target >= 1000 ? '+' : target === 100 ? '%' : '+');
+                requestAnimationFrame(update);
+            } else {
+                counter.textContent = target + (target >= 1000 ? '+' : target === 100 ? '%' : '+');
+            }
+        };
+
+        update();
+    });
+}
+
+// ============================================
+// QUIZ FUNCTIONS
+// ============================================
+
+function handleQuiz(page) {
+    navigateTo(page);
+}
+
+function checkAnswer(btn, isCorrect) {
+    const answers = btn.parentElement.querySelectorAll('.quiz-answer');
+    answers.forEach(a => {
+        a.style.pointerEvents = 'none';
+        if (a === btn) {
+            a.classList.add(isCorrect ? 'correct' : 'wrong');
+        }
+    });
+
+    // Show correct answer if wrong
+    if (!isCorrect) {
+        answers.forEach(a => {
+            if (a.onclick.toString().includes('true')) {
+                a.classList.add('correct');
+            }
+        });
+    }
+
+    // Update progress
+    updateProgress();
+}
+
+function updateProgress() {
+    const totalQuestions = document.querySelectorAll('.quiz-question').length;
+    const answered = document.querySelectorAll('.quiz-answer.correct, .quiz-answer.wrong').length;
+    const progress = Math.min(100, Math.round((answered / totalQuestions) * 100));
+    const progressBar = document.getElementById('overallProgress');
+    const progressText = document.getElementById('progressPercent');
+    if (progressBar) progressBar.style.width = progress + '%';
+    if (progressText) progressText.textContent = progress;
+}
+
+// AI Quiz (Is this AI?)
+function checkAIQuiz(userAnswer) {
+    const data = aiQuizData[aiQuizIndex];
+    const feedback = document.getElementById('aiQuizFeedback');
+    feedback.style.display = 'block';
+    feedback.textContent = data.explanation;
+    feedback.style.color = userAnswer === data.answer ? 'var(--success)' : 'var(--error)';
+
+    setTimeout(() => {
+        aiQuizIndex = (aiQuizIndex + 1) % aiQuizData.length;
+        document.getElementById('aiQuizQuestion').textContent = aiQuizData[aiQuizIndex].question;
+        feedback.style.display = 'none';
+    }, 2500);
+}
+
+// ============================================
+// TRAINING SIMULATION
+// ============================================
+
+function simulateTraining() {
+    const btn = document.getElementById('trainBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Training...';
+
+    let epoch = 0;
+    let accuracy = 0;
+    let loss = 1.0;
+
+    const interval = setInterval(() => {
+        epoch++;
+        accuracy = Math.min(98.5, accuracy + (Math.random() * 15 + 5));
+        loss = Math.max(0.015, loss - (Math.random() * 0.12 + 0.05));
+
+        document.getElementById('trainEpoch').textContent = epoch;
+        document.getElementById('trainAccuracy').textContent = accuracy.toFixed(1) + '%';
+        document.getElementById('trainLoss').textContent = loss.toFixed(3);
+        document.getElementById('trainProgressBar').style.width = accuracy + '%';
+
+        if (epoch >= 10) {
+            clearInterval(interval);
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-redo"></i> Train Again';
+            document.getElementById('trainAccuracy').textContent = '98.5%';
+            document.getElementById('trainProgressBar').style.width = '98.5%';
+        }
+    }, 600);
+}
+
+// ============================================
+// NEURAL NETWORK INTERACTIVE
+// ============================================
+
+function activateNeuron(el) {
+    el.classList.toggle('active');
+
+    // Simple chain reaction
+    const layer = el.parentElement;
+    const nextLayer = layer.nextElementSibling;
+    if (nextLayer && nextLayer.classList.contains('nn-layer')) {
+        setTimeout(() => {
+            const neurons = nextLayer.querySelectorAll('.nn-neuron');
+            neurons[Math.floor(Math.random() * neurons.length)].classList.add('active');
+        }, 300);
+    }
+}
+
+// ============================================
+// TEACH AI INTERACTIVE
+// ============================================
+
+let labeledCount = 0;
+function labelItem(el, label) {
+    if (el.dataset.labeled) return;
+    el.dataset.labeled = true;
+    el.style.borderColor = 'var(--success)';
+    el.style.background = 'rgba(16,185,129,0.1)';
+    el.innerHTML += `<br><span style="font-size:0.7rem;">${label}</span>`;
+    labeledCount++;
+    document.getElementById('labelCount').textContent = `Items labeled: ${labeledCount}/5`;
+    if (labeledCount >= 5) {
+        document.getElementById('labelResult').style.display = 'block';
+    }
+}
+
+// ============================================
+// SENTIMENT ANALYSIS
+// ============================================
+
+function analyzeSentiment() {
+    const input = document.getElementById('sentimentInput').value.toLowerCase();
+    const result = document.getElementById('sentimentResult');
+    result.style.display = 'block';
+
+    const positiveWords = ['love', 'great', 'awesome', 'amazing', 'happy', 'good', 'excellent', 'wonderful', 'fantastic', 'best', 'like', 'enjoy', 'beautiful', 'fun', 'cool', 'nice'];
+    const negativeWords = ['hate', 'bad', 'terrible', 'awful', 'horrible', 'worst', 'ugly', 'boring', 'stupid', 'angry', 'sad', 'disappointed', 'annoying', 'dislike'];
+
+    let positive = 0, negative = 0;
+    positiveWords.forEach(w => { if (input.includes(w)) positive++; });
+    negativeWords.forEach(w => { if (input.includes(w)) negative++; });
+
+    if (!input) {
+        result.textContent = '⚠️ Please type something first!';
+    } else if (positive > negative) {
+        result.textContent = '😊 Positive! (Confidence: ' + Math.min(99, 60 + positive * 15) + '%)';
+    } else if (negative > positive) {
+        result.textContent = '😟 Negative (Confidence: ' + Math.min(99, 60 + negative * 15) + '%)';
+    } else {
+        result.textContent = '😐 Neutral (Confidence: 72%)';
+    }
+}
+
+// ============================================
+// TOOLS RENDERING
+// ============================================
+
+function renderTools(filter) {
+    const grid = document.getElementById('toolsGrid');
+    if (!grid) return;
+
+    const filtered = filter === 'all' ? aiTools : aiTools.filter(t => t.categories.includes(filter));
+
+    grid.innerHTML = filtered.map((tool, i) => `
+        <div class="tool-card animate-on-scroll" onclick="openToolModal(${aiTools.indexOf(tool)})" style="animation-delay:${i * 0.05}s">
+            <div class="tool-card-header">
+                <div class="tool-logo" style="background:${tool.color}">
+                    <i class="${tool.icon}"></i>
+                </div>
+                <div>
+                    <h3>${tool.name}</h3>
+                    <span class="tool-category">${tool.bestFor.replace('Best for: ', '')}</span>
+                </div>
+            </div>
+            <p class="tool-description">${tool.description}</p>
+            <div class="tool-tags">
+                ${tool.tags.map(t => `<span class="tool-tag">${t}</span>`).join('')}
+            </div>
+            <div class="tool-footer">
+                <div class="tool-rating">
+                    ${'<i class="fas fa-star"></i>'.repeat(Math.floor(tool.rating))}
+                    <span>${tool.rating}</span>
+                </div>
+                <span class="tool-pricing ${tool.pricing}">${tool.pricing.charAt(0).toUpperCase() + tool.pricing.slice(1)}</span>
+            </div>
+        </div>
+    `).join('');
+
+    setTimeout(initScrollAnimations, 100);
+}
+
+function filterTools(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTools(category);
+}
+
+function openToolModal(index) {
+    const tool = aiTools[index];
+    const modal = document.getElementById('toolModal');
+    const content = document.getElementById('toolModalContent');
+
+    content.innerHTML = `
+        <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+        <div style="display:flex;align-items:center;gap:15px;margin-bottom:1.5rem;">
+            <div class="tool-logo" style="background:${tool.color};width:56px;height:56px;font-size:1.5rem;">
+                <i class="${tool.icon}"></i>
+            </div>
+            <div>
+                <h2>${tool.name}</h2>
+                <p class="modal-category">${tool.bestFor}</p>
+            </div>
+        </div>
+        <div class="modal-section">
+            <h4>📝 Description</h4>
+            <p>${tool.description}</p>
+        </div>
+        <div class="modal-section">
+            <h4>🎯 How to Use It</h4>
+            <p>${tool.howToUse}</p>
+        </div>
+        <div class="pros-cons">
+            <div class="modal-section">
+                <h4>✅ Pros</h4>
+                <ul class="pros">${tool.pros.map(p => `<li>${p}</li>`).join('')}</ul>
+            </div>
+            <div class="modal-section">
+                <h4>❌ Cons</h4>
+                <ul class="cons">${tool.cons.map(c => `<li>${c}</li>`).join('')}</ul>
+            </div>
+        </div>
+        <div class="modal-section">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+                <div class="tool-rating" style="font-size:1rem;">
+                    ${'<i class="fas fa-star"></i>'.repeat(Math.floor(tool.rating))} ${tool.rating}/5
+                </div>
+                <span class="tool-pricing ${tool.pricing}" style="font-size:0.9rem;padding:6px 16px;">
+                    ${tool.pricing.charAt(0).toUpperCase() + tool.pricing.slice(1)}
+                </span>
+            </div>
+        </div>
+        <a href="${tool.link}" target="_blank" class="btn-primary" style="display:block;text-align:center;margin-top:1.5rem;padding:14px;">
+            <i class="fas fa-external-link-alt"></i> Visit ${tool.name}
+        </a>
+    `;
+
+    modal.classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('toolModal').classList.remove('active');
+}
+
+// ============================================
+// EDUCATION TABS
+// ============================================
+
+function switchEduTab(tab, btn) {
+    document.querySelectorAll('.edu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.edu-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('edu-' + tab).classList.add('active');
+
+    if (tab === 'prompts') renderPrompts();
+}
+
+function renderPrompts() {
+    const grid = document.getElementById('promptGrid');
+    if (!grid) return;
+
+    grid.innerHTML = prompts.map((p, i) => `
+        <div class="prompt-card" onclick="copyPrompt(this, ${i})">
+            <button class="copy-btn" id="copyBtn${i}">📋 Copy</button>
+            <h4>${p.title}</h4>
+            <div class="prompt-text">"${p.prompt}"</div>
+            <p class="prompt-use">💡 Use for: ${p.use}</p>
+        </div>
+    `).join('');
+}
+
+function copyPrompt(card, index) {
+    const prompt = prompts[index].prompt;
+    navigator.clipboard.writeText(prompt).then(() => {
+        const btn = document.getElementById('copyBtn' + index);
+        btn.textContent = '✅ Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = '📋 Copy';
+            btn.classList.remove('copied');
+        }, 2000);
+    });
+}
+
+// ============================================
+// BLOG RENDERING
+// ============================================
+
+function renderBlog() {
+    const grid = document.getElementById('blogGrid');
+    if (!grid) return;
+
+    grid.innerHTML = blogPosts.map((post, i) => `
+        <div class="blog-card animate-on-scroll" style="animation-delay:${i * 0.1}s">
+            <div class="blog-image" style="background:${post.gradient}">
+                <i class="${post.icon}"></i>
+                <span class="blog-tag">${post.tag}</span>
+            </div>
+            <div class="blog-body">
+                <h3>${post.title}</h3>
+                <p>${post.excerpt}</p>
+                <div class="blog-meta">
+                    <span><i class="fas fa-clock"></i> ${post.readTime} read</span>
+                    <span><i class="fas fa-calendar"></i> ${post.date}</span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    setTimeout(initScrollAnimations, 100);
+}
+
+// ============================================
+// CHATBOT
+// ============================================
+
+function toggleChat() {
+    const window = document.getElementById('chatWindow');
+    const icon = document.getElementById('chatIcon');
+    window.classList.toggle('active');
+
+    if (window.classList.contains('active')) {
+        icon.className = 'fas fa-times';
+        document.querySelector('.chat-badge').style.display = 'none';
+    } else {
+        icon.className = 'fas fa-comment-dots';
+    }
+}
+
+function sendChat() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const messagesDiv = document.getElementById('chatMessages');
+
+    // Add user message
+    messagesDiv.innerHTML += `<div class="chat-message user">${message}</div>`;
+
+    // Clear input
+    input.value = '';
+
+    // Show typing
+    messagesDiv.innerHTML += `<div class="chat-message bot typing" id="typingMsg"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    // Find response
+    setTimeout(() => {
+        const typing = document.getElementById('typingMsg');
+        if (typing) typing.remove();
+
+        let response = chatResponses.default;
+        const lowerMsg = message.toLowerCase();
+
+        for (const [key, val] of Object.entries(chatResponses)) {
+            if (key !== 'default' && lowerMsg.includes(key)) {
+                response = val;
+                break;
+            }
+        }
+
+        messagesDiv.innerHTML += `<div class="chat-message bot">${response}</div>`;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }, 1200);
+}
+
+// ============================================
+// FORMS
+// ============================================
+
+function subscribeNewsletter() {
+    const email = document.getElementById('newsletterEmail');
+    if (email && email.value) {
+        document.getElementById('newsletterSuccess').classList.add('show');
+        email.value = '';
+        setTimeout(() => {
+            document.getElementById('newsletterSuccess').classList.remove('show');
+        }, 4000);
+    }
+}
+
+function submitContact() {
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    if (name && email) {
+        document.getElementById('contactSuccess').classList.add('show');
+        document.getElementById('contactName').value = '';
+        document.getElementById('contactEmail').value = '';
+        document.getElementById('contactMessage').value = '';
+        setTimeout(() => {
+            document.getElementById('contactSuccess').classList.remove('show');
+        }, 4000);
+    }
+}
+
+function handleLogin() {
+    alert('🎉 Login feature coming soon! This is a demo version.');
+    navigateTo('dashboard');
+}
+
+function toggleAuth() {
+    alert('📝 Registration feature coming soon! This is a demo version.');
+}
+
+// ============================================
+// CLOSE MODAL ON OUTSIDE CLICK
+// ============================================
+
+document.getElementById('toolModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+// ============================================
+// KEYBOARD SHORTCUTS
+// ============================================
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal();
+        document.getElementById('chatWindow').classList.remove('active');
+        document.getElementById('chatIcon').className = 'fas fa-comment-dots';
+    }
+});
+
+// ============================================
+// LOADING SCREEN
+// ============================================
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loadingScreen').classList.add('hidden');
+        initParticles();
+        initNeuralNetwork();
+        initScrollAnimations();
+        animateCounters();
+    }, 1000);
+});
+</script>
+
+</body>
+</html>
